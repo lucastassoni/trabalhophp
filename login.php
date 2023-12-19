@@ -6,14 +6,16 @@ if (isset($_SESSION["nome_usuario"])) {
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $valid_username = "lucas";
-    $valid_password = "123123";
+include("conexao.php"); // Certifique-se de incluir o arquivo de conexão com o banco de dados
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_usuario = $_POST["nome_usuario"];
     $senha = $_POST["senha"];
 
-    if ($nome_usuario == $valid_username && $senha == $valid_password) {
+    // Consulta o banco de dados para verificar as credenciais
+    $consulta = mysqli_query($conexao, "SELECT * FROM usuario WHERE name='$nome_usuario' AND senha='$senha'");
+
+    if (mysqli_num_rows($consulta) == 1) {
         $_SESSION["nome_usuario"] = $nome_usuario;
         header("Location: principal.php");
         exit();
@@ -21,6 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("Credenciais inválidas. Tente novamente.");</script>';
     }
 }
+
+mysqli_close($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -71,20 +75,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="row submit-area">
                         <div class="col-md-6 submit-col">
-                            <button class="submit-btn" type="submit"><img class="arrow-login"
+                            <button style="color: #292929;"class="submit-btn" type="submit"><p class="p-login-cadastro">Acessar</p><img class="arrow-login"
                                     src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
                         </div>
+                        
                         <div class="col-md-6 submit-col">
-                            <button class="submit-btn" id="meuBotao"></button>
+                        <button class="submit-btn"  type="button" id="meuBotao"><p class="p-login-cadastro">Registrar</p><img class="arrow-login"
+                                    src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
                         </div>
                     </div>                
 
-                    width: 8vh;
-    height: 8vh;
-    background-color: rgba(68, 66, 66, 0.8);
-    border-radius: 10px;
-    transition: 0.3s ease-in-out;
-    border: 1px solid gray;
 
 
                 </div>
