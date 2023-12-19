@@ -747,13 +747,20 @@ html::-moz-scrollbar-thumb:hover {
 }
 
 .submit-btn {
-    width: 8vh;
-    height: 8vh;
-    background-color: rgba(68, 66, 66, 0.8);
-    border-radius: 10px;
+    width: 17vh;
+    height: 7.1vh;
+    background-color: #292929;  
+    border-radius: 12px;
     transition: 0.3s ease-in-out;
-    border: 1px solid gray;
 }
+
+.p-login-cadastro {
+    margin-bottom: 0;
+    color: #555;
+    font-family: lol-font2 !important;
+    font-size: 1.1em;
+}
+
 
 .submit-col {
     width: auto;

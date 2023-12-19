@@ -1,27 +1,30 @@
 <?php
 
-$usuario=isset($_POST['usuario'])?$_POST['usuario']:null;
-$email=isset($_POST['email'])?$_POST['email']:null;
-  $senha=isset($_POST['senha'])?$_POST['senha']:null;
+$username = isset($_POST['usuario']) ? $_POST['usuario'] : null;
+$email = isset($_POST['email']) ? $_POST['email'] : null;
+$usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
 
- //////inserção  no BD
- include("conexao.php");
-  if(isset($_POST['Incluir']) && !empty($_POST['usuario'])){
-    
-    $db=mysqli_select_db($conexao,$banco);
-    $grava=mysqli_query($conexao,"insert into usuario
-    (usuario,email,senha) values ('$usuario','$email','$senha')");
-    if($grava==true){
-      echo"Cadastro efetuado com sucesso!";
-        
-    }else
-    die("Conexão falhou: " . mysqli_connect_error());
-  } 
- 
+// Inserção no BD
+include("conexao.php");
+if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
+    $db = mysqli_select_db($conexao, $banco);
+    $grava = mysqli_query($conexao, "insert into usuario (name,email,senha) values ('$username','$email','$usersenha')");
+    if ($grava == true) {
+        // Mensagem de alerta usando JavaScript
+        echo '<script>';
+        echo 'alert("Cadastro efetuado com sucesso, parabéns!");';
+        echo 'window.location.href = "login.php";'; // Redireciona após clicar em OK
+        echo '</script>';
+        exit();
+    } else {
+        die("Conexão falhou: " . mysqli_connect_error());
+    }
+}
 
-mysqli_close($conexao); 
+mysqli_close($conexao);
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,7 +39,9 @@ mysqli_close($conexao);
         crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Login</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <title>Login</title>
 </head>
 
 <body>
@@ -75,8 +80,8 @@ mysqli_close($conexao);
                     </div>
                     <div class="row submit-area">
                         <div class="col-md-12 submit-col">
-                            <button class="submit-btn" type="submit"><img class="arrow-login"
-                                    src="img/—Pngtree—right arrow_4421150.png" name="Incluir" alt=""></button>
+                            <button name="Incluir" class="submit-btn" type="submit"><img class="arrow-login"
+                                    src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
                         </div>
                     </div>                
                 </div>
