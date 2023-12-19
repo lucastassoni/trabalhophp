@@ -1,26 +1,26 @@
 <?php
-session_start();
 
-if (isset($_SESSION["nome_usuario"])) {
-    header("Location: principal.php");
-    exit();
-}
+$usuario=isset($_POST['usuario'])?$_POST['usuario']:null;
+$email=isset($_POST['email'])?$_POST['email']:null;
+  $senha=isset($_POST['senha'])?$_POST['senha']:null;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $valid_username = "lucas";
-    $valid_password = "123123";
+ //////inserção  no BD
+ include("conexao.php");
+  if(isset($_POST['Incluir']) && !empty($_POST['usuario'])){
+    
+    $db=mysqli_select_db($conexao,$banco);
+    $grava=mysqli_query($conexao,"insert into usuario
+    (usuario,email,senha) values ('$usuario','$email','$senha')");
+    if($grava==true){
+      echo"Cadastro efetuado com sucesso!";
+        
+    }else
+    die("Conexão falhou: " . mysqli_connect_error());
+  } 
+ 
 
-    $nome_usuario = $_POST["nome_usuario"];
-    $senha = $_POST["senha"];
+mysqli_close($conexao); 
 
-    if ($nome_usuario == $valid_username && $senha == $valid_password) {
-        $_SESSION["nome_usuario"] = $nome_usuario;
-        header("Location: principal.php");
-        exit();
-    } else {
-        echo '<script>alert("Credenciais inválidas. Tente novamente.");</script>';
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <form action="login.php" method="POST">
+    <form action="cadastro.php" method="POST">
         <div class="container-fluid">
             <div class="row main-login">
                 <div class="col-md-4 login-area">
@@ -55,13 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="row text-row">
                         <div class="col-md-12 login-text-col">
-                            <p id="login-text">Fazer Login</p>
+                            <p id="login-text">Fazer Cadastro</p>
                         </div>
                     </div>
                     <div class="row user-input">
                         <div class="col-md-12 login-input-col">
-                            <input class="login-input" type="text" placeholder="Nome de usuário" name="nome_usuario"
-                                required>
+                            <input class="login-input" type="text" placeholder="Nome de usuário" name="usuario" required>
+                        </div>
+                    </div>
+                    <div class="row user-input">
+                        <div class="col-md-12 login-input-col">
+                            <input class="login-input" type="text" placeholder="E-mail" name="email" required>
                         </div>
                     </div>
                     <div class="row user-input">
@@ -70,12 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
                     <div class="row submit-area">
-                        <div class="col-md-6 submit-col">
+                        <div class="col-md-12 submit-col">
                             <button class="submit-btn" type="submit"><img class="arrow-login"
-                                    src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
-                        </div>
-                        <div class="col-md-6 submit-col-cadastro">
-                            <button class="submit-btn-cadastro" type="submit"><<p id="Cadastro-text">Cadastre-se</p>></button>
+                                    src="img/—Pngtree—right arrow_4421150.png" name="Incluir" alt=""></button>
                         </div>
                     </div>                
                 </div>
@@ -87,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </form>
+    
 </body>
 
 </html>

@@ -800,14 +800,7 @@ html::-moz-scrollbar-thumb:hover {
     opacity: 0.7;
 }
 
-.submit-btn-cadastro {
-    width: 20vh;
-    height: 8vh;
-    background-color: rgba(68, 66, 66, 0.8);
-    border-radius: 10px;
-    transition: 0.3s ease-in-out;
-    border: 1px solid gray;
-}
+
 
 .submit-col-cadastro {
     width: auto;

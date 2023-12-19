@@ -74,10 +74,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button class="submit-btn" type="submit"><img class="arrow-login"
                                     src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
                         </div>
-                        <div class="col-md-6 submit-col-cadastro">
-                            <button class="submit-btn-cadastro" type="button"><p id="Cadastro-text meuBotao">Cadastre-se</p></button>
+                        <div class="col-md-6 submit-col">
+                            <button class="submit-btn" id="meuBotao"></button>
                         </div>
                     </div>                
+
+                    width: 8vh;
+    height: 8vh;
+    background-color: rgba(68, 66, 66, 0.8);
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    border: 1px solid gray;
+
+
                 </div>
                 <div class="col-md-8 image-area">
                     <video autoplay loop muted playsinline id="background-video-login"
@@ -87,6 +96,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </form>
+
+    <script>
+  // Obtém o elemento do botão pelo ID
+  var meuBotao = document.getElementById('meuBotao');
+
+  // Adiciona um ouvinte de evento para o clique no botão
+  meuBotao.addEventListener('click', function() {
+    // Redireciona para a URL desejada
+    window.location.href = 'cadastro.php';
+  });
+</script>
 </body>
 
 </html>
