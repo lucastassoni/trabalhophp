@@ -1,10 +1,13 @@
 <?php
+session_start();
+
 $username = isset($_POST['usuario']) ? $_POST['usuario'] : null;
 $email = isset($_POST['email']) ? $_POST['email'] : null;
 $usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
 
 // Inserção no BD
 include("conexao.php");
+
 if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
     $db = mysqli_select_db($conexao, $banco);
     $grava = mysqli_query($conexao, "INSERT INTO usuario (nome, email, senha, dinheiro) VALUES ('$username', '$email', '$usersenha', 100.00)");
@@ -30,6 +33,7 @@ if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
 
 mysqli_close($conexao);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
