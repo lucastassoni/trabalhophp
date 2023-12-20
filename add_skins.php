@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <span class="p-editar">Preço:</span> <input class="login-input-editar" type="number" name="preco" required><br>
     <span class="p-editar">Descrição:</span> <textarea class="login-input-editar" name="descricao" required></textarea><br>
     <span class="p-editar">URL da Imagem:</span> <input class="login-input-editar" type="text" name="imagem" required><br>
-    <button style="cursor: pointer" class="save-button" type="submit"><p class="p-editar">Inserir Skin</p></button>
+    <button class="save-button" type="submit"><p class="p-editar">Inserir Skin</p></button>
     </form>
 </body>
 </html>
