@@ -22,6 +22,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $novo_email = $_POST['email'];
     $nova_senha = $_POST['senha'];
 
+    // Verifica se o email e a senha estão preenchidos
+    if (empty($novo_email)) {
+        $novo_email = $email_usuario;
+    }
+
+    if (empty($nova_senha)) {
+        $nova_senha = $senha_usuario;
+    }
+
     // Atualizar no banco de dados usando instrução preparada
     $sql = "UPDATE usuario SET nome = ?, email = ?, senha = ? WHERE nome = ?";
     $stmt = $conexao->prepare($sql);
@@ -64,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link type="image/png" rel="icon" href="img/LoL_icon.svg.png">
 <body class="bg-edit">
 <form class="main-editar" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-<h1 class="editar-msg">Edição de perfil</h1>
+<h1 class="editar-msg">Editar perfil</h1>
                     
                     <label for="nome"><p class="p-editar">Nome:</p></label>
                     <input class="login-input-editar" type="text" name="nome" value="<?php echo $nome_usuario; ?>">

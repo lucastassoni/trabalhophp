@@ -132,7 +132,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-q-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p>Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
+                                                <p class="testando123">Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
                                                     contato, ganha um acúmulo de Tempestade Crescente por alguns
                                                     segundos. Com 2 acúmulos, Aço Mortal faz com que Yone avance com o
                                                     vento, arremessando ao ar os inimigos. Aço Mortal é tratada como
