@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $username = isset($_POST['usuario']) ? $_POST['usuario'] : null;
 $email = isset($_POST['email']) ? $_POST['email'] : null;
@@ -6,10 +7,17 @@ $usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
 
 // Inserção no BD
 include("conexao.php");
+
 if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
     $db = mysqli_select_db($conexao, $banco);
     $grava = mysqli_query($conexao, "insert into usuario (name,email,senha) values ('$username','$email','$usersenha')");
+
     if ($grava == true) {
+        // Armazena as informações na sessão
+        $_SESSION["nome_usuario"] = $username;
+        $_SESSION["email"] = $email;
+        $_SESSION["senha"] = $usersenha;
+
         // Mensagem de alerta usando JavaScript
         echo '<script>';
         echo 'alert("Cadastro efetuado com sucesso, parabéns!");';
