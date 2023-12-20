@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adição de Skins</title>
 </head>
-<body>
+<body class="bg-edit-3">
     <form class="main-editar" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <h1 class="editar-msg">Adicionar Skins</h1>
     <span class="p-editar">Nome:</span> <input class="login-input-editar" type="text" name="nome" required><br>

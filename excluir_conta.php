@@ -52,11 +52,11 @@ mysqli_close($conn);
     <script src="./js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link type="image/png" rel="icon" href="img/LoL_icon.svg.png">
-<body class="bg-edit">
+<body class="bg-edit-2">
 <form class="main-editar" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
                     <h1 class="editar-msg">Excluir conta</h1>
-                    <p class="editar-msg">Tem certeza de que deseja excluir sua conta?</p>
+                    <p class="editar-msg">Tem certeza de que deseja excluir sua conta? <br><br>Você perderá seu inventário de skins!</p>
                     <input class="back-button" type="submit" value="Sim, Excluir Conta">
 
     </form>
