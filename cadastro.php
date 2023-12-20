@@ -1,5 +1,4 @@
 <?php
-
 $username = isset($_POST['usuario']) ? $_POST['usuario'] : null;
 $email = isset($_POST['email']) ? $_POST['email'] : null;
 $usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
@@ -8,8 +7,16 @@ $usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
 include("conexao.php");
 if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
     $db = mysqli_select_db($conexao, $banco);
-    $grava = mysqli_query($conexao, "insert into usuario (name,email,senha) values ('$username','$email','$usersenha')");
+    $grava = mysqli_query($conexao, "INSERT INTO usuario (nome, email, senha, dinheiro) VALUES ('$username', '$email', '$usersenha', 100.00)");
+
     if ($grava == true) {
+        // Recupera o ID do usuário recém-inserido
+        $idDoUsuario = mysqli_insert_id($conexao);
+
+        // Armazena o ID do usuário na sessão
+        session_start();
+        $_SESSION["id_usuario"] = $idDoUsuario;
+
         // Mensagem de alerta usando JavaScript
         echo '<script>';
         echo 'alert("Cadastro efetuado com sucesso, parabéns!");';
@@ -22,9 +29,7 @@ if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
 }
 
 mysqli_close($conexao);
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -1,13 +1,15 @@
 <?php
-// Inicia a sessão (caso não tenha sido iniciada)
 session_start();
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION["nome_usuario"])) {
     // Se não estiver logado, redireciona para a página de login
-    header("Location: login.php");
+    header("Location: login.php?msg=not_logged_in");
     exit();
 }
+
+// Recupera o nome do usuário da sessão
+$nome_usuario = $_SESSION["nome_usuario"];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ if (!isset($_SESSION["nome_usuario"])) {
 </head>
 
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
@@ -58,6 +60,15 @@ if (!isset($_SESSION["nome_usuario"])) {
                         </li>
                     </ul>
                 </div>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <span class="nav-link text-light">Usuário: <?php echo $nome_usuario; ?></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout.php" class="nav-link btn btn-danger logout"><span class="sair-text">Sair</span></a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>

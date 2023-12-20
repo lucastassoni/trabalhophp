@@ -44,7 +44,7 @@ $nome_usuario = $_SESSION["nome_usuario"];
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria-current="page" href="yasuo.php"
-                                role="button">Yasuo</a>
+                                role="button">Skins</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yone.php"
@@ -71,7 +71,6 @@ $nome_usuario = $_SESSION["nome_usuario"];
                     </li>
                 </ul>
             </div>
-</div>
         </nav>
     </header>
     <video autoplay loop muted id="video-background">

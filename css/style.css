@@ -748,7 +748,7 @@ html::-moz-scrollbar-thumb:hover {
 
 .submit-btn {
     width: 17vh;
-    height: 7.1vh;
+    height: 7vh;
     background-color: #292929;  
     border-radius: 12px;
     transition: 0.3s ease-in-out;

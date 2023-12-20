@@ -1,14 +1,27 @@
 <?php
-// Inicia a sessão (caso não tenha sido iniciada)
 session_start();
 
+
+include_once 'conexao.php';
 // Verifica se o usuário está logado
 if (!isset($_SESSION["nome_usuario"])) {
     // Se não estiver logado, redireciona para a página de login
-    header("Location: login.php");
+    header("Location: login.php?msg=not_logged_in");
     exit();
 }
+
+// Recupera o nome do usuário da sessão
+$nome_usuario = $_SESSION["nome_usuario"];
+
+
+$querySkins = "SELECT idskin, nome, descricao, preco, imagem FROM skins";
+$resultSkins = mysqli_query($conexao, $querySkins);
+
+if (!$resultSkins) {
+    die("Erro na consulta ao banco de dados: " . mysqli_error($conexao));
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,7 +29,7 @@ if (!isset($_SESSION["nome_usuario"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasuo</title>
+    <title>Skins</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <script src="./js/main.js"></script>
@@ -25,7 +38,7 @@ if (!isset($_SESSION["nome_usuario"])) {
 </head>
 
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
@@ -41,7 +54,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria-current="page" href="yasuo.php"
-                                role="button">Yasuo</a>
+                                role="button">Skins</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yone.php"
@@ -58,6 +71,15 @@ if (!isset($_SESSION["nome_usuario"])) {
                         </li>
                     </ul>
                 </div>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <span class="nav-link text-light">Usuário: <?php echo $nome_usuario; ?></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout.php" class="nav-link btn btn-danger logout"><span class="sair-text">Sair</span></a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -71,160 +93,47 @@ if (!isset($_SESSION["nome_usuario"])) {
         <div class="row section">
             <div class="col-md-8">
                 <div id="carouselExampleCaptions" class="carousel slide">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
-                            aria-current="true" aria-label="Slide 4"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
-                            aria-label="Slide 5"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5"
-                            aria-label="Slide 6"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6"
-                            aria-current="true" aria-label="Slide 7"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="7"
-                            aria-label="Slide 8"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="8"
-                            aria-label="Slide 9"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="9"
-                            aria-current="true" aria-label="Slide 10"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="10"
-                            aria-label="Slide 11"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="11"
-                            aria-label="Slide 12"></button>
+                <div class="carousel-indicators">
+                    <?php
+                    $indicatorCount = 0;
+                    while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
+                        $activeClass = ($indicatorCount == 0) ? 'active' : '';
+                        echo '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="' . $indicatorCount . '" class="' . $activeClass . '" aria-label="Slide ' . $indicatorCount . '"></button>';
+                        $indicatorCount++;
+                    }
+                    ?>
+                </div>
+
+                <div class="carousel-inner">
+                        <?php
+                        mysqli_data_seek($resultSkins, 0);
+                        $itemCount = 0;
+                        while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
+                            $activeClass = ($itemCount == 0) ? 'active' : '';
+                            echo '<div class="carousel-item ' . $activeClass . '">';
+                            echo '<img src="' . $rowSkin['imagem'] . '" class="d-block w-100" alt="...">';
+                            echo '<div class="carousel-caption d-none d-md-block">';
+                            echo '<h5>' . $rowSkin['nome'] . '</h5>';
+                            echo '<p>' . $rowSkin['descricao'] . '</p>';
+                            echo '<a href="processar_compra.php?item=' . $rowSkin['nome'] . '" class="btn btn-primary">Comprar</a>';
+                            echo '</div>';
+                            echo '</div>';
+                            $itemCount++;
+                        }
+                        ?>
                     </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="img/Yasuo_HighNoonSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO VELHO OESTE</h5>
-                                <p>Misterioso e relutante xerife, Yasuo está em exílio autoimposto após ser acusado de
-                                    assassinato nos territórios do leste. Mesmo assim, ele já expulsou grupos inteiros
-                                    de bandidos, como muitas das ameaças mais mortíferas do deserto.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_PROJECTSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>PROJETO: YASUO</h5>
-                                <p>Yasuo voltou do combate avançado só para ser acusado de um crime que não cometeu.
-                                    Sabendo que o alto escalão comporativo da PROJETO esta envolvido, Yasuo luta ao lado
-                                    dos rebeldes da G/NÉTICA, cortando as mentiras tecnológicas pela
-                                    raiz com sua lâmina revestida de plasma.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_BloodMoonSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO LUA SANGRENTA</h5>
-                                <p>Carrasco cerimonial do culto Lua Sangrenta, Yasuo tem habitado em sua lâmina um
-                                    demônio traiçoeiro e sanguinário cuja sede de morte é insaciável. Mas para Yasuo
-                                    essa era a combinação perfeita, já que sua escuridão interna é ainda mais profunda
-                                    do que a ciratura sussurrante que o acompanha.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_NightbringerSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO EMISSÁRIO DA ESCURIDÃO</h5>
-                                <p>Nascido a partir de ecos ressonantes no alvorecer da criação, Yasuo é a perfeita
-                                    incorporação do caos nos cosmos. Destinado a enfrentar a Emissária da Luz até o fim
-                                    dos tempos, ele aguarda o dia em que a escuridão finalmente apagará a luz.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_OdysseySkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO ODISSÉIA</h5>
-                                <p>Yasuo nunca quis ser um pirata do espaço. Foragido de uma dezena de facções militares
-                                    e paramilitares, ele está reunindo uma excêntrica tripulação para começar uma vida
-                                    nova nas estrelas.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_BattleBossSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO CHEFÃO</h5>
-                                <p>Ex-protagonista do clássico jogo cult de 1979 "Hasagi", Yasuo foi infectado pelo
-                                    código maligno de Veigar depois da tomada de Fliperância pelos Chefões. Ele continua
-                                    com uma mecânica de jogo incrivelmente complexa e ataques de dano absurdo, mas agora
-                                    luta em nome das forças do mal.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_TrueDamageSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO TRUE DAMAGE</h5>
-                                <p>Tão enigmático quanto talentoso, Yasuo é o produtor veterano que todos procuram para
-                                    encontrar inspiração. Suas batidas transcendem os gêneros, pintando universos
-                                    inteiros com fantásticas texturas de som.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_SpiritBlossomSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO FLORESCER ESPIRITUAL</h5>
-                                <p>Há muito tempo, dois irmãos se confrontam em uma guerra impiedosa espalhada por toda
-                                    Ionia. Yasuo, o mais novo, era um comandante conhecido por sua conduta inusitada.
-                                    Ambos os irmãos estavam fadados a um duelo final, desta vez no reino espiritual.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_SeaDogSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO LOBO DO MAR</h5>
-                                <p>Fortalecido pelos Buhru durante sua luta contra Viego de Camavor, Yasuo se tornou
-                                    partidário improvável dos filhos de Nagacábouros. Isso mostra que até mesmo o lobo
-                                    do mar mais sarnento tem seu lugar ao sol, e Yasuo emergiu triunfante ao enfrentar
-                                    as
-                                    forças das trevas.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_TruthDragonSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO DRAGÃO DA VERDADE</h5>
-                                <p>Yasuo escolheu resistir e lutar, mesmo sozinho contra um exército. Brandindo a
-                                    verdade de aço como numa dança, derrotou incontáveis inimigos - mas nem mesmo ele
-                                    poderia fazer isso para sempre. O Dragão da Verdade ficou comovido com o domínio
-                                    dele sobre a espada e desceu dos picos para abençoa-lo.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_DreamDragonSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO DRAGÃO DOS SONHOS</h5>
-                                <p>A música do aço cessou, e Yasuo foi a última alma viva no campo de batalha. À beira
-                                    da morte, Yasuo usou sua flauta para tocar uma última elegia. O Dragão dos Sonhos
-                                    desceu do topo da montanha, e comovido com a música que tocava, ofereceu a ele seu
-                                    poder.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/Yasuo_InkshadowSkin.webp" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>YASUO TINTA SOMBRIA</h5>
-                                <p>Exilado ao lado de Master Yi, Yasuo agora usa suas tatuagens de Tinta Sombria para
-                                    cavalgar o vento entre a cidade de Rabadon e seus arredores. Embora tenha desistido
-                                    de sua liberdade em troca de poder, ele vê o preço como uma penitência por naão oder
-                                    ajuda aqueles que mais precisam.</p>
-                            </div>
-                        </div>
-                    </div>
+
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
                         data-bs-slide="prev">
+
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
-                    </button>
+                        </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
-                    </button>
+                        </button>
                 </div>
             </div>
 

@@ -10,10 +10,10 @@ include("conexao.php"); // Certifique-se de incluir o arquivo de conexão com o 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_usuario = $_POST["nome_usuario"];
-    $senha = $_POST["senha"];
+    $senha = $_POST["senha"];   
 
     // Consulta o banco de dados para verificar as credenciais
-    $consulta = mysqli_query($conexao, "SELECT * FROM usuario WHERE name='$nome_usuario' AND senha='$senha'");
+    $consulta = mysqli_query($conexao, "SELECT * FROM usuario WHERE nome='$nome_usuario' AND senha='$senha'");
 
     if (mysqli_num_rows($consulta) == 1) {
         $_SESSION["nome_usuario"] = $nome_usuario;
