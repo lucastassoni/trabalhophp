@@ -490,62 +490,62 @@ html::-moz-scrollbar-thumb:hover {
 }
 
 #back-yone-p {
-    background-image: url("./img/Icon_Yone_Passive.jpg");
+    background-image: url("../img/Icon_Yone_Passive.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yone-q {
-    background-image: url("./img/Icon_Yone_Q.jpg");
+    background-image: url("../img/Icon_Yone_Q.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yone-w {
-    background-image: url("./img/Icon_Yone_W.jpg");
+    background-image: url("../img/Icon_Yone_W.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yone-e {
-    background-image: url("./img/Icon_Yone_E.jpg");
+    background-image: url("../img/Icon_Yone_E.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yone-r {
-    background-image: url("./img/Icon_Yone_R.jpg");
+    background-image: url("../img/Icon_Yone_R.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 
 #back-yasuo-p {
-    background-image: url("./img/yasuo-p.webp");
+    background-image: url("../img/yasuo-p.webp");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yasuo-q {
-    background-image: url("./img/yasuo-q.webp");
+    background-image: url("../img/yasuo-q.webp");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yasuo-w {
-    background-image: url("./img/yasuo-w.webp");
+    background-image: url("../img/yasuo-w.webp");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yasuo-e {
-    background-image: url("./img/yasuo-e.webp");
+    background-image: url("../img/yasuo-e.webp");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #back-yasuo-r {
-    background-image: url("./img/yasuo-r.webp");
+    background-image: url("../img/yasuo-r.webp");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -578,61 +578,61 @@ html::-moz-scrollbar-thumb:hover {
 }
 
 #modalyone1 {
-    background-image: url("./img/IoniaHeader2.jpg");
+    background-image: url("../img/IoniaHeader2.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyone2 {
-    background-image: url("./img/IoniaHeader3.jpg");
+    background-image: url("../img/IoniaHeader3.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyone3 {
-    background-image: url("./img/IoniaHeader4.jpg");
+    background-image: url("../img/IoniaHeader4.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyone4 {
-    background-image: url("./img/IoniaHeader5.jpg");
+    background-image: url("../img/IoniaHeader5.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyone5 {
-    background-image: url("./img/IoniaHeader6.jpg");
+    background-image: url("../img/IoniaHeader6.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyasuo1 {
-    background-image: url("./img/IoniaHeader1.jpg");
+    background-image: url("../img/IoniaHeader1.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyasuo2 {
-    background-image: url("./img/IoniaHeader7.jpg");
+    background-image: url("../img/IoniaHeader7.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyasuo3 {
-    background-image: url("./img/IoniaHeader8.jpg");
+    background-image: url("../img/IoniaHeader8.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyasuo4 {
-    background-image: url("./img/IoniaHeader9.jpg");
+    background-image: url("../img/IoniaHeader9.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 #modalyasuo5 {
-    background-image: url("./img/IoniaHeader10.jpg");
+    background-image: url("../img/IoniaHeader10.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -749,7 +749,7 @@ html::-moz-scrollbar-thumb:hover {
 .submit-btn {
     width: 17vh;
     height: 7.1vh;
-    background-color: #292929;  
+    background-color: #292929;
     border-radius: 12px;
     transition: 0.3s ease-in-out;
 }

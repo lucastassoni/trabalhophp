@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nova_senha = $_POST['senha'];
 
     // Atualizar no banco de dados usando instrução preparada
-    $sql = "UPDATE usuario SET name = ?, email = ?, senha = ? WHERE name = ?";
+    $sql = "UPDATE usuario SET nome = ?, email = ?, senha = ? WHERE nome = ?";
     $stmt = $conexao->prepare($sql);
 
     if ($stmt) {

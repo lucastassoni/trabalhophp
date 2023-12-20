@@ -20,7 +20,7 @@ class Skin
         // Conectar ao seu banco de dados (substitua pelos dados reais do seu banco)
         $servername = "localhost";
         $username = "root";
-        $password = "Daiane@10";
+        $password = "root";
         $dbname = "bdoflegends";
 
         $conn = new mysqli($servername, $username, $password, $dbname);

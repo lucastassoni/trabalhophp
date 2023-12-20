@@ -27,7 +27,7 @@ if (!$conn) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $sql = "DELETE FROM usuario WHERE name = '$nome_usuario'";
+    $sql = "DELETE FROM usuario WHERE nome = '$nome_usuario'";
 
     if (mysqli_query($conn, $sql)) {
         
