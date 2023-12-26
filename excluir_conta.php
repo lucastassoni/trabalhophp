@@ -11,36 +11,24 @@ if (!isset($_SESSION["nome_usuario"])) {
 
 $nome_usuario = $_SESSION["nome_usuario"];
 
-
-$servidor = "localhost";
-$usuario_bd = "root";
-$senha_bd = "root";
-$banco = "bdoflegends";
-
-$conn = mysqli_connect($servidor, $usuario_bd, $senha_bd, $banco);
-
-
-if (!$conn) {
-    die("Falha na conexão com o banco de dados: " . mysqli_connect_error());
-}
-
+include("conexao.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $sql = "DELETE FROM usuario WHERE name = '$nome_usuario'";
+    $db = mysqli_select_db($conexao, $banco);
+    $consulta = mysqli_query($conexao, "DELETE FROM usuario WHERE name = '$nome_usuario'");
 
-    if (mysqli_query($conn, $sql)) {
+    if ($consulta == true) {
         
         session_unset();
         session_destroy();
         header("Location: login.php"); 
         exit();
     } else {
-        echo "Erro ao excluir a conta: " . mysqli_error($conn);
+        die("Erro ao excluir a conta: " . mysqli_connect_error());;
     }
 }
 
-mysqli_close($conn);
+mysqli_close($conexao);
 ?>
 
 <!DOCTYPE html>

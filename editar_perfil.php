@@ -6,51 +6,33 @@ if (!isset($_SESSION["nome_usuario"])) {
     exit();
 }
 
+include("conexao.php"); 
 $nome_usuario = $_SESSION["nome_usuario"];
 $email_usuario = isset($_SESSION["email"]) ? $_SESSION["email"] : "";
 $senha_usuario = isset($_SESSION["senha"]) ? $_SESSION["senha"] : "";
 
+$novo_username = isset($_POST['novo_nome']) ? $_POST['novo_nome'] : null;
+$novo_email = isset($_POST['novo_email']) ? $_POST['novo_email'] : null;
+$nova_senha = isset($_POST['nova_senha']) ? $_POST['nova_senha'] : null;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $conexao = new mysqli("localhost", "root", "root", "bdoflegends");
-
-    if ($conexao->connect_error) {
-        die("Erro na conexão com o banco de dados: " . $conexao->connect_error);
-    }
-
-    // Dados do formulário
-    $novo_nome = $_POST['nome'];
-    $novo_email = $_POST['email'];
-    $nova_senha = $_POST['senha'];
-
-    // Atualizar no banco de dados usando instrução preparada
-    $sql = "UPDATE usuario SET name = ?, email = ?, senha = ? WHERE name = ?";
-    $stmt = $conexao->prepare($sql);
-
-    if ($stmt) {
-        $stmt->bind_param("ssss", $novo_nome, $novo_email, $nova_senha, $nome_usuario);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            echo '<script>alert("Informações atualizadas com sucesso!");</script>';
-
-            // Reiniciar a sessão
-            session_regenerate_id(true);
-
-            // Atualizar as informações na variável de sessão também
-            $_SESSION["nome_usuario"] = $novo_nome;
-            $_SESSION["email"] = $novo_email;
-            $_SESSION["senha"] = $nova_senha;
-        } else {
-            echo '<script>alert("Nenhuma alteração realizada.");</script>';
-        }
-
-        $stmt->close();
+    $db = mysqli_select_db($conexao, $banco);
+    $grava = mysqli_query($conexao, "UPDATE usuario SET nome='$novo_username', email='$novo_email', senha='$nova_senha' WHERE nome='$nome_usuario'");
+    if ($grava == true) {
+        // Atualiza as variáveis de sessão com os novos valores
+        $_SESSION["nome_usuario"] = $novo_username;
+        $_SESSION["email"] = $novo_email;
+        $_SESSION["senha"] = $nova_senha;
+        echo '<script>alert("Informações atualizadas com sucesso!");';
+        echo 'window.location.href = "principal.php";'; // Redireciona após clicar em OK
+        echo '</script>';
+        exit();
     } else {
-        echo "Erro na preparação da consulta: " . $conexao->error;
+        die("Conexão falhou: " . mysqli_connect_error());
     }
-
-    $conexao->close();
 }
+
+mysqli_close($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -67,13 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <h1 class="editar-msg">Edição de perfil</h1>
                     
                     <label for="nome"><p class="p-editar">Nome:</p></label>
-                    <input class="login-input-editar" type="text" name="nome" value="<?php echo $nome_usuario; ?>">
+                    <input class="login-input-editar" type="text" name="novo_nome" required value ="<?php echo $nome_usuario; ?>">
 
                     <label for="email"><p class="p-editar">Email:</p></label>
-                    <input class="login-input-editar" type="email" name="email" value="<?php echo $email_usuario; ?>">
+                    <input class="login-input-editar" type="email" name="novo_email" required value ="<?php echo $email_usuario; ?>">
 
                     <label for="senha"><p class="p-editar">Senha:</p></label>
-                    <input class="login-input-editar" type="password" name="senha">
+                    <input class="login-input-editar" type="password" name="nova_senha" required>
 
                     <button class="save-button" type="submit"><p class="p-editar">Salvar Alterações</p></button>
                 
@@ -93,7 +75,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </script>
 </body>
 </html>
-
-
-    
-        
