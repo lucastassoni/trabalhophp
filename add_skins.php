@@ -20,7 +20,7 @@ class Skin
         // Conectar ao seu banco de dados (substitua pelos dados reais do seu banco)
         $servername = "localhost";
         $username = "root";
-        $password = "Daiane@10";
+        $password = "root";
         $dbname = "bdoflegends";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -62,11 +62,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<!-- Formulário HTML -->
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    Nome: <input type="text" name="nome" required><br>
-    Preço: <input type="number" name="preco" required><br>
-    Descrição: <textarea name="descricao" required></textarea><br>
-    URL da Imagem: <input type="text" name="imagem" required><br>
-    <input type="submit" value="Inserir Skin">
-</form>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adição de Skins</title>
+</head>
+<body class="bg-edit-3">
+    <form class="main-editar" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <h1 class="editar-msg">Adicionar Skins</h1>
+    <span class="p-editar">Nome:</span> <input class="login-input-editar" type="text" name="nome" required><br>
+    <span class="p-editar">Preço:</span> <input class="login-input-editar" type="number" name="preco" required><br>
+    <span class="p-editar">Descrição:</span> <textarea class="login-input-editar" name="descricao" required></textarea><br>
+    <span class="p-editar">URL da Imagem:</span> <input class="login-input-editar" type="text" name="imagem" required><br>
+    <button class="save-button" type="submit"><p class="p-editar">Inserir Skin</p></button>
+    </form>
+</body>
+</html>

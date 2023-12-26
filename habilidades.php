@@ -99,7 +99,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-p-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p>Yone causa Dano Mágico a cada segundo Ataque. Além disso, sua Chance
+                                                <p class="testando123">Yone causa Dano Mágico a cada segundo Ataque. Além disso, sua Chance
                                                     de Acerto Crítico é aumentada.</p>
                                             </div>
                                             <div class="modal-footer">
@@ -132,7 +132,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-q-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p>Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
+                                                <p class="testando123">Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
                                                     contato, ganha um acúmulo de Tempestade Crescente por alguns
                                                     segundos. Com 2 acúmulos, Aço Mortal faz com que Yone avance com o
                                                     vento, arremessando ao ar os inimigos. Aço Mortal é tratada como
@@ -169,7 +169,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-w-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p>Ataca à frente, causando dano a todos os inimigos em uma área de
+                                                <p class="testando123">Ataca à frente, causando dano a todos os inimigos em uma área de
                                                     cone. Concede um escudo a Yone. O valor do escudo aumenta com base
                                                     no número de Campeões atingidos pelo golpe. O Tempo de Recarga e o
                                                     tempo de conjuração de Fenda Espiritual escalam com Velocidade de
@@ -206,7 +206,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-e-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p>O espírito de Yone deixa seu corpo para trás e recebe Velocidade de
+                                                <p class="testando123">O espírito de Yone deixa seu corpo para trás e recebe Velocidade de
                                                     Movimento. Quando essa habilidade termina, o espírito de Yone volta
                                                     ao corpo e ele repete parte do dano causado na forma espiritual.</p>
                                             </div>
@@ -242,7 +242,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-R-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p>Yone teleporta-se para trás do último Campeão em uma linha,
+                                                <p class="testando123">Yone teleporta-se para trás do último Campeão em uma linha,
                                                     desferindo um golpe tão poderoso que puxa na direção dele todos os
                                                     inimigos atingidos.</p>
                                             </div>
@@ -298,7 +298,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-p-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p>A Chance de Acerto Crítico do Yasuo é aumentada. Além disso, Yasuo
+                                                <p class="testando123">A Chance de Acerto Crítico do Yasuo é aumentada. Além disso, Yasuo
                                                     vai gerando um Escudo sempre que se movimenta. O Escudo é ativado
                                                     quando Yasuo sofre dano de um Campeão ou monstro.</p>
                                             </div>
@@ -333,7 +333,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-q-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p>Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
+                                                <p class="testando123">Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
                                                     contato, Tempestade de Aço concede um acúmulo de Tempestade
                                                     Crescente por alguns segundos. Com 2 acúmulos, Tempestade de Aço
                                                     desfere um tornado que arremessa inimigos ao ar. Tempestade de Aço é
@@ -370,7 +370,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-w-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p>Cria uma parede movediça que bloqueia todos os projéteis inimigos por
+                                                <p class="testando123">Cria uma parede movediça que bloqueia todos os projéteis inimigos por
                                                     4 segundos.</p>
                                             </div>
                                             <div class="modal-footer">
@@ -404,7 +404,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-e-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p>Avança e atravessa o inimigo-alvo, causando Dano Mágico. Cada
+                                                <p class="testando123">Avança e atravessa o inimigo-alvo, causando Dano Mágico. Cada
                                                     conjuração aumenta o dano do próximo avanço, até um limite máximo.
                                                     Não pode ser conjurada novamente no mesmo inimigo por alguns
                                                     segundos. Se Tempestade de Aço for conjurada durante o avanço, o
@@ -442,7 +442,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-r-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p>Teletransporta-se para um Campeão inimigo arremessado ao ar, causando
+                                                <p class="testando123">Teletransporta-se para um Campeão inimigo arremessado ao ar, causando
                                                     Dano Físico e mantendo no ar todos os inimigos da área que foram
                                                     arremessados ao ar. Concede o máximo de Fluxo, mas zera todos os
                                                     acúmulos de Tempestade Crescente Por um período moderado a seguir,
