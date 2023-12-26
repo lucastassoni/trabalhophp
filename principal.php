@@ -68,8 +68,7 @@ $nome_usuario = $_SESSION["nome_usuario"];
                 </li>
                 <li class="nav-item dropdown op-class">
                 <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Opções
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="editar_perfil.php">Editar Perfil</a>
@@ -188,9 +187,7 @@ $nome_usuario = $_SESSION["nome_usuario"];
         <a class="riot-a" href="https://www.riotgames.com/pt-br" target="_blank">
             <img class="riot-logo" style="opacity: 0.8;" src="img/riot-games.png" alt="">
         </a>
-
     </footer>
-
 </body>
 
 </html>

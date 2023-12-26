@@ -12,13 +12,11 @@ if (!isset($_SESSION["nome_usuario"])) {
 $nome_usuario = $_SESSION["nome_usuario"];
 
 include("conexao.php");
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db = mysqli_select_db($conexao, $banco);
-    $consulta = mysqli_query($conexao, "DELETE FROM usuario WHERE name = '$nome_usuario'");
+    $consulta = mysqli_query($conexao, "DELETE FROM usuario WHERE nome = '$nome_usuario'");
 
     if ($consulta == true) {
-        
         session_unset();
         session_destroy();
         header("Location: login.php"); 
