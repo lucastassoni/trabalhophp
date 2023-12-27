@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_SESSION["nome_usuario"])) {
     header("Location: principal.php");
-    exit();
+    exit(); 
 }
 
 include("conexao.php"); // Certifique-se de incluir o arquivo de conexão com o banco de dados
@@ -17,14 +17,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($consulta) == 1) {
         $_SESSION["nome_usuario"] = $nome_usuario;
+    
+        // Obtém o caminho da foto do usuário
+        $row = mysqli_fetch_assoc($consulta);
+        $_SESSION["fotoPath"] = $row["foto"];  // Certifique-se de que a coluna se chama "foto" no seu banco de dados
+    
         header("Location: principal.php");
         exit();
     } else {
         echo '<script>alert("Credenciais inválidas. Tente novamente.");</script>';
-    }
-}
+    } 
 
 mysqli_close($conexao);
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +41,8 @@ mysqli_close($conexao);
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Login</title>
@@ -75,15 +80,19 @@ mysqli_close($conexao);
                     </div>
                     <div class="row submit-area">
                         <div class="col-md-6 submit-col">
-                            <button style="color: #292929;"class="submit-btn" type="submit"><p class="p-login-cadastro">Acessar</p><img class="arrow-login"
-                                    src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
+                            <button style="color: #292929;" class="submit-btn" type="submit">
+                                <p class="p-login-cadastro">Acessar</p><img class="arrow-login"
+                                    src="img/—Pngtree—right arrow_4421150.png" alt="">
+                            </button>
                         </div>
-                        
+
                         <div class="col-md-6 submit-col">
-                        <button class="submit-btn"  type="button" id="meuBotao"><p class="p-login-cadastro">Registrar</p><img class="arrow-login"
-                                    src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
+                            <button class="submit-btn" type="button" id="meuBotao">
+                                <p class="p-login-cadastro">Registrar</p><img class="arrow-login"
+                                    src="img/—Pngtree—right arrow_4421150.png" alt="">
+                            </button>
                         </div>
-                    </div>                
+                    </div>
 
 
 
@@ -98,15 +107,15 @@ mysqli_close($conexao);
     </form>
 
     <script>
-  // Obtém o elemento do botão pelo ID
-  var meuBotao = document.getElementById('meuBotao');
+    // Obtém o elemento do botão pelo ID
+    var meuBotao = document.getElementById('meuBotao');
 
-  // Adiciona um ouvinte de evento para o clique no botão
-  meuBotao.addEventListener('click', function() {
-    // Redireciona para a URL desejada
-    window.location.href = 'cadastro.php';
-  });
-</script>
+    // Adiciona um ouvinte de evento para o clique no botão
+    meuBotao.addEventListener('click', function() {
+        // Redireciona para a URL desejada
+        window.location.href = 'cadastro.php';
+    });
+    </script>
 </body>
 
 </html>

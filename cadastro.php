@@ -8,9 +8,17 @@ $usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
 // Inserção no BD
 include("conexao.php");
 
+$fotoPath = null;
+if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+    $uploadDir = 'uploads/'; // Crie uma pasta chamada 'uploads' para armazenar as imagens do usuário
+    $uploadFile = $uploadDir . basename($_FILES['foto']['name']);
+    move_uploaded_file($_FILES['foto']['tmp_name'], $uploadFile);
+    $fotoPath = $uploadFile;
+}
+
 if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
     $db = mysqli_select_db($conexao, $banco);
-    $grava = mysqli_query($conexao, "INSERT INTO usuario (nome, email, senha, dinheiro) VALUES ('$username', '$email', '$usersenha', 100.00)");
+    $grava = mysqli_query($conexao, "INSERT INTO usuario (nome, email, senha, dinheiro, foto) VALUES ('$username', '$email', '$usersenha', 100.00, '$fotoPath')");
 
     if ($grava == true) {
         // Recupera o ID do usuário recém-inserido
@@ -44,17 +52,17 @@ mysqli_close($conexao);
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <title>Login</title>
+    <title>Login</title>
 </head>
 
 <body>
-    <form action="cadastro.php" method="POST">
+    <form action="cadastro.php" method="POST" enctype="multipart/form-data">
         <div class="container-fluid">
             <div class="row main-login">
                 <div class="col-md-4 login-area">
@@ -74,7 +82,8 @@ mysqli_close($conexao);
                     </div>
                     <div class="row user-input">
                         <div class="col-md-12 login-input-col">
-                            <input class="login-input" type="text" placeholder="Nome de usuário" name="usuario" required>
+                            <input class="login-input" type="text" placeholder="Nome de usuário" name="usuario"
+                                required>
                         </div>
                     </div>
                     <div class="row user-input">
@@ -87,12 +96,33 @@ mysqli_close($conexao);
                             <input class="login-input" type="password" placeholder="Senha" name="senha" required>
                         </div>
                     </div>
+                    <div class="row user-input" style="display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+    width: 100%;">
+                        <div class="col-md-12" style="display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;">
+                            <label style="color: white; margin-bottom: -10%; font-size: 18px" for="foto">Selecione uma
+                                foto
+                                de
+                                perfil:</label>
+                        </div>
+                    </div>
+                    <div class="row user-input">
+                        <div class="col-md-12 login-input-col">
+                            <input class="login-input" type="file" name="foto" accept="image/*">
+                        </div>
+                    </div>
                     <div class="row submit-area">
                         <div class="col-md-12 submit-col">
                             <button name="Incluir" class="submit-btn" type="submit"><img class="arrow-login"
                                     src="img/—Pngtree—right arrow_4421150.png" alt=""></button>
                         </div>
-                    </div>                
+                    </div>
                 </div>
                 <div class="col-md-8 image-area">
                     <video autoplay loop muted playsinline id="background-video-login"
@@ -102,7 +132,7 @@ mysqli_close($conexao);
             </div>
         </div>
     </form>
-    
+
 </body>
 
 </html>

@@ -10,6 +10,7 @@ if (!isset($_SESSION["nome_usuario"])) {
 
 // Recupera o nome do usuário da sessão
 $nome_usuario = $_SESSION["nome_usuario"];
+$fotoPath = $_SESSION["fotoPath"];
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +28,7 @@ $nome_usuario = $_SESSION["nome_usuario"];
 </head>
 
 <body>
-<header>
+    <header>
         <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
@@ -63,13 +64,16 @@ $nome_usuario = $_SESSION["nome_usuario"];
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <span class="nav-link text-light">Usuário: <?php echo $nome_usuario; ?></span>
+                            <img src="<?php echo $fotoPath; ?>" alt="Foto de Perfil"
+                                style="width: 45px; height: 45px; border-radius: 50%; margin-left: 100%">
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link text-light"><?php echo $nome_usuario; ?></span>
                         </li>
                         <li class="nav-item dropdown op-class">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
-                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"><img
-                                    style="width: 1.5vw; height: 3vh" src="./img/engrenagem.png" alt="opçoes">
+                                role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    style="width: 30px; height: 30px" src="./img/engrenagem.png" alt="opçoes">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="editar_perfil.php">Editar Perfil</a>

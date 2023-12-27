@@ -29,18 +29,20 @@ if ($consulta === null) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Inventário de Skins</title>
     <style>
-        /* Estilos para exibir as imagens */
-        .skin-image {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            margin: 5px;
-        }
+    /* Estilos para exibir as imagens */
+    .skin-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 5px;
+    }
     </style>
 </head>
+
 <body>
     <h1>Inventário de Skins</h1>
 
@@ -58,6 +60,7 @@ if ($consulta === null) {
         ?>
     </div>
 </body>
+
 </html>
 
 <?php
