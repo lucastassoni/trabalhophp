@@ -45,7 +45,11 @@ if ($consulta === null) {
     </style>
 </head>
 
-<body class="bg-inv">
+<body style="background-image: url('./img/bg-inv_auto_x2.jpg');
+    height: 100vh;
+    width: 100vw;
+    background-size: 100% 100%;
+    background-repeat: no-repeat; overflow: hidden  ">
     <h1>Inventário de Skins</h1>
 
     <div class="skin-gallery">
