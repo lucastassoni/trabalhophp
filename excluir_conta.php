@@ -32,22 +32,25 @@ mysqli_close($conexao);
 <!DOCTYPE html>
 <html lang="pt-br">
 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusão de perfil</title>
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
-    <script src="./js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link type="image/png" rel="icon" href="img/LoL_icon.svg.png">
-<body class="bg-edit">
-<form class="main-editar" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exclusão de perfil</title>
+<link rel="stylesheet" href="./css/style.css" type="text/css">
+<script src="./js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link type="image/png" rel="icon" href="img/LoL_icon.svg.png">
 
-                    <h1 class="editar-msg">Excluir conta</h1>
-                    <p class="editar-msg">Tem certeza de que deseja excluir sua conta?</p>
-                    <input class="back-button" type="submit" value="Sim, Excluir Conta">
+<body class="bg-edit">
+    <form class="main-editar" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+        <h1 class="editar-msg">Excluir conta</h1>
+        <p class="editar-msg">Tem certeza de que deseja excluir sua conta?</p>
+        <p class="editar-msg">Essa ação não pode ser desfeita.</p>
+        <input class="back-button" type="submit" value="Sim, Excluir Conta">
 
     </form>
 
 
 
 </body>
+
 </html>

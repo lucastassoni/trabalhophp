@@ -8,6 +8,7 @@ if (!isset($_SESSION["nome_usuario"])) {
     header("Location: login.php");
     exit();
 }
+$nome_usuario = $_SESSION["nome_usuario"];
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +42,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary botao" aria-current="page" href="yasuo.php"
-                                role="button">Yasuo</a>
+                            <a class="nav-link btn btn-primary botao" aria-current="page" href="skins.php"
+                                role="button">Skins</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yone.php"
@@ -59,7 +60,25 @@ if (!isset($_SESSION["nome_usuario"])) {
                         </li>
                     </ul>
                 </div>
-            </div>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <span class="nav-link text-light">Usuário: <?php echo $nome_usuario; ?></span>
+                        </li>
+                        <li class="nav-item dropdown op-class">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
+                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Opções
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="editar_perfil.php">Editar Perfil</a>
+                                <a class="dropdown-item" href="excluir_conta.php">Excluir Conta</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout.php">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
         </nav>
     </header>
 
@@ -99,7 +118,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-p-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Yone causa Dano Mágico a cada segundo Ataque. Além disso, sua Chance
+                                                <p class="testando123">Yone causa Dano Mágico a cada segundo Ataque.
+                                                    Além disso, sua Chance
                                                     de Acerto Crítico é aumentada.</p>
                                             </div>
                                             <div class="modal-footer">
@@ -132,7 +152,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-q-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
+                                                <p class="testando123">Golpeia à frente, causando dano a todos os
+                                                    inimigos em linha reta. Ao
                                                     contato, ganha um acúmulo de Tempestade Crescente por alguns
                                                     segundos. Com 2 acúmulos, Aço Mortal faz com que Yone avance com o
                                                     vento, arremessando ao ar os inimigos. Aço Mortal é tratada como
@@ -169,7 +190,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-w-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Ataca à frente, causando dano a todos os inimigos em uma área de
+                                                <p class="testando123">Ataca à frente, causando dano a todos os inimigos
+                                                    em uma área de
                                                     cone. Concede um escudo a Yone. O valor do escudo aumenta com base
                                                     no número de Campeões atingidos pelo golpe. O Tempo de Recarga e o
                                                     tempo de conjuração de Fenda Espiritual escalam com Velocidade de
@@ -206,7 +228,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-e-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p class="testando123">O espírito de Yone deixa seu corpo para trás e recebe Velocidade de
+                                                <p class="testando123">O espírito de Yone deixa seu corpo para trás e
+                                                    recebe Velocidade de
                                                     Movimento. Quando essa habilidade termina, o espírito de Yone volta
                                                     ao corpo e ele repete parte do dano causado na forma espiritual.</p>
                                             </div>
@@ -242,7 +265,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     muted>
                                                     <source src="img/ability-R-yone.mp4" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Yone teleporta-se para trás do último Campeão em uma linha,
+                                                <p class="testando123">Yone teleporta-se para trás do último Campeão em
+                                                    uma linha,
                                                     desferindo um golpe tão poderoso que puxa na direção dele todos os
                                                     inimigos atingidos.</p>
                                             </div>
@@ -298,7 +322,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-p-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p class="testando123">A Chance de Acerto Crítico do Yasuo é aumentada. Além disso, Yasuo
+                                                <p class="testando123">A Chance de Acerto Crítico do Yasuo é aumentada.
+                                                    Além disso, Yasuo
                                                     vai gerando um Escudo sempre que se movimenta. O Escudo é ativado
                                                     quando Yasuo sofre dano de um Campeão ou monstro.</p>
                                             </div>
@@ -333,7 +358,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-q-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Golpeia à frente, causando dano a todos os inimigos em linha reta. Ao
+                                                <p class="testando123">Golpeia à frente, causando dano a todos os
+                                                    inimigos em linha reta. Ao
                                                     contato, Tempestade de Aço concede um acúmulo de Tempestade
                                                     Crescente por alguns segundos. Com 2 acúmulos, Tempestade de Aço
                                                     desfere um tornado que arremessa inimigos ao ar. Tempestade de Aço é
@@ -370,7 +396,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-w-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Cria uma parede movediça que bloqueia todos os projéteis inimigos por
+                                                <p class="testando123">Cria uma parede movediça que bloqueia todos os
+                                                    projéteis inimigos por
                                                     4 segundos.</p>
                                             </div>
                                             <div class="modal-footer">
@@ -404,7 +431,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-e-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Avança e atravessa o inimigo-alvo, causando Dano Mágico. Cada
+                                                <p class="testando123">Avança e atravessa o inimigo-alvo, causando Dano
+                                                    Mágico. Cada
                                                     conjuração aumenta o dano do próximo avanço, até um limite máximo.
                                                     Não pode ser conjurada novamente no mesmo inimigo por alguns
                                                     segundos. Se Tempestade de Aço for conjurada durante o avanço, o
@@ -442,7 +470,8 @@ if (!isset($_SESSION["nome_usuario"])) {
                                                     loop muted>
                                                     <source src="img/ability-r-yasuo.webm" type="video/webm">
                                                 </video>
-                                                <p class="testando123">Teletransporta-se para um Campeão inimigo arremessado ao ar, causando
+                                                <p class="testando123">Teletransporta-se para um Campeão inimigo
+                                                    arremessado ao ar, causando
                                                     Dano Físico e mantendo no ar todos os inimigos da área que foram
                                                     arremessados ao ar. Concede o máximo de Fluxo, mas zera todos os
                                                     acúmulos de Tempestade Crescente Por um período moderado a seguir,

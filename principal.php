@@ -43,7 +43,7 @@ $nome_usuario = $_SESSION["nome_usuario"];
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary botao" aria-current="page" href="yasuo.php"
+                            <a class="nav-link btn btn-primary botao" aria-current="page" href="skins.php"
                                 role="button">Skins</a>
                         </li>
                         <li class="nav-item">
@@ -68,8 +68,8 @@ $nome_usuario = $_SESSION["nome_usuario"];
                         </li>
                         <li class="nav-item dropdown op-class">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
-                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">Opções
+                                role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    src="./img/engrenagem.png" class="option-icon" alt="opçoes">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="editar_perfil.php">Editar Perfil</a>

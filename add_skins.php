@@ -1,5 +1,11 @@
 <?php
-
+// Verifica se o usuário está logado
+if (!isset($_SESSION["nome_usuario"])) {
+    // Se não estiver logado, redireciona para a página de login
+    header("Location: login.php?msg=not_logged_in");
+    exit();
+}
+    
 class Skin
 {
     private $nome;
@@ -64,20 +70,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adição de Skins</title>
 </head>
+
 <body class="bg-edit-3">
     <form class="main-editar" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <h1 class="editar-msg">Adicionar Skins</h1>
-    <span class="p-editar">Nome:</span> <input class="login-input-editar" type="text" name="nome" required><br>
-    <span class="p-editar">Preço:</span> <input class="login-input-editar" type="number" name="preco" required><br>
-    <span class="p-editar">Descrição:</span> <textarea class="login-input-editar" name="descricao" required></textarea><br>
-    <span class="p-editar">URL da Imagem:</span> <input class="login-input-editar" type="text" name="imagem" required><br>
-    <button class="save-button" type="submit"><p class="p-editar">Inserir Skin</p></button>
+        <h1 class="editar-msg">Adicionar Skins</h1>
+        <span class="p-editar">Nome:</span> <input class="login-input-editar" type="text" name="nome" required><br>
+        <span class="p-editar">Preço:</span> <input class="login-input-editar" type="number" name="preco" required><br>
+        <span class="p-editar">Descrição:</span> <textarea class="login-input-editar" name="descricao"
+            required></textarea><br>
+        <span class="p-editar">URL da Imagem:</span> <input class="login-input-editar" type="text" name="imagem"
+            required><br>
+        <button class="save-button" type="submit">
+            <p class="p-editar">Inserir Skin</p>
+        </button>
     </form>
 </body>
+
 </html>

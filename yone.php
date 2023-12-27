@@ -42,8 +42,8 @@ $nome_usuario = $_SESSION["nome_usuario"];
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary botao" aria-current="page" href="yasuo.php"
-                                role="button">Yasuo</a>
+                            <a class="nav-link btn btn-primary botao" aria-current="page" href="skins.php"
+                                role="button">Skins</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yone.php"
@@ -61,15 +61,24 @@ $nome_usuario = $_SESSION["nome_usuario"];
                     </ul>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <span class="nav-link text-light">Usuário: <?php echo $nome_usuario; ?></span>
-                    </li>
-                    <li class="nav-item">
-                        <a href="logout.php" class="nav-link btn btn-danger logout"><span class="sair-text">Sair</span></a>
-                    </li>
-                </ul>
-            </div>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <span class="nav-link text-light">Usuário: <?php echo $nome_usuario; ?></span>
+                        </li>
+                        <li class="nav-item dropdown op-class">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
+                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Opções
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="editar_perfil.php">Editar Perfil</a>
+                                <a class="dropdown-item" href="excluir_conta.php">Excluir Conta</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout.php">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
         </nav>
     </header>
     <video autoplay loop muted id="video-background">

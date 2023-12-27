@@ -927,3 +927,9 @@ html::-moz-scrollbar-thumb:hover {
     padding: 10px;
     border-radius: 8px;
 }
+
+.option-icon {
+    width: 2vw;
+    height: 2vh;
+
+}

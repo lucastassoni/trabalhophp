@@ -87,7 +87,7 @@ if ($dinheiroUsuario >= $precoItem) {
 
     echo '<script>';
     echo 'alert("Skin adqurida com sucesso, verifique seu inventário! Sua página vai recarregar após sua confirmação.");';
-    echo 'window.location.href = "yasuo.php";'; // Redireciona após clicar em OK
+    echo 'window.location.href = "skins.php";'; // Redireciona após clicar em OK
     echo '</script>';
     exit();
 } else {
