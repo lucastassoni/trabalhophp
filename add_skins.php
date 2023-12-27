@@ -42,7 +42,7 @@ class Skin
 
         // Executar a instrução SQL
         if ($conn->query($sql) === TRUE) {
-            echo "Skin inserida com sucesso!";
+            echo '<script>alert("Skin inserida com sucesso!")</script>';
         } else {
             echo "Erro ao inserir skin: " . $conn->error;
         }

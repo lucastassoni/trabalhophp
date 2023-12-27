@@ -66,7 +66,8 @@ $nome_usuario = $_SESSION["nome_usuario"];
                         <li class="nav-item dropdown op-class">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
                                 role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">Opções
+                                aria-expanded="false"><img
+                                    style="width: 1.5vw; height: 3vh" src="./img/engrenagem.png" alt="opçoes">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="editar_perfil.php">Editar Perfil</a>
