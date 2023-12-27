@@ -88,7 +88,7 @@ mysqli_close($conexao);
                     </div>
                     <div class="row user-input">
                         <div class="col-md-12 login-input-col">
-                            <input class="login-input" type="text" placeholder="E-mail" name="email" required>
+                            <input class="login-input" type="email" placeholder="E-mail" name="email" required>
                         </div>
                     </div>
                     <div class="row user-input">

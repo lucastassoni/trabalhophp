@@ -1,10 +1,4 @@
 <?php
-// Verifica se o usuário está logado
-if (!isset($_SESSION["nome_usuario"])) {
-    // Se não estiver logado, redireciona para a página de login
-    header("Location: login.php?msg=not_logged_in");
-    exit();
-}
     
 class Skin
 {

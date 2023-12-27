@@ -921,6 +921,14 @@ html::-moz-scrollbar-thumb:hover {
     background-repeat: no-repeat;
 }
 
+.bg-inv {
+    background-image: url("../img/bg-inv_auto_x2.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
 .testando123 {
     background-color: white;
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);

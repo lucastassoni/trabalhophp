@@ -37,13 +37,15 @@ if ($consulta === null) {
     .skin-image {
         width: 150px;
         height: 150px;
-        object-fit: cover;
+        object-fit: contain;
         margin: 5px;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+        border-radius: 5px;
     }
     </style>
 </head>
 
-<body>
+<body class="bg-inv">
     <h1>Inventário de Skins</h1>
 
     <div class="skin-gallery">

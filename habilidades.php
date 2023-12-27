@@ -53,11 +53,11 @@ $fotoPath = $_SESSION["fotoPath"];
 
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="habilidades.php"
-                                role="button">Habilidade</a>
+                                role="button">habilidades</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary botao" aria aria-current="page" href="highlights.php"
-                                role="button">Highlights</a>
+                            <a class="nav-link btn btn-primary botao" aria aria-current="page" href="inventario.php"
+                                role="button">inventário</a>
                         </li>
                     </ul>
                 </div>
