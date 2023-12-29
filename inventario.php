@@ -9,6 +9,7 @@ if (!isset($_SESSION["nome_usuario"])) {
 include("conexao.php");
 $userID = $_SESSION["id_usuario"];
 
+
 $db = mysqli_select_db($conexao, $banco);
 if (!$db) {
     die("Erro ao selecionar o banco de dados: " . mysqli_error($conexao));
@@ -31,6 +32,7 @@ if ($consulta === null) {
 <html>
 
 <head>
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
     <title>Inventário de Skins</title>
     <style>
     /* Estilos para exibir as imagens */
@@ -50,6 +52,9 @@ if ($consulta === null) {
     width: 100vw;
     background-size: 100% 100%;
     background-repeat: no-repeat; overflow: hidden  ">
+    <button class="back-btn" type="button" id="meuBotao">
+        <p class="p-login-cadastro">Voltar</p><img class="arrow-login" src="img/arrow_left.png" alt="">
+    </button>
     <h1>Inventário de Skins</h1>
 
     <div class="skin-gallery">
@@ -65,6 +70,15 @@ if ($consulta === null) {
         }
         ?>
     </div>
+
+    <script>
+    var meuBotao = document.getElementById('meuBotao');
+
+    meuBotao.addEventListener('click', function() {
+
+        window.location.href = 'principal.php';
+    });
+    </script>
 </body>
 
 </html>

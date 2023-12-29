@@ -1,16 +1,17 @@
 <?php
+// Inicia a sessão (caso não tenha sido iniciada)
 session_start();
+
+$userID = $_SESSION["id_usuario"];
+$nome_usuario = $_SESSION["nome_usuario"];
+$fotoPath = $_SESSION["fotoPath"];
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION["nome_usuario"])) {
     // Se não estiver logado, redireciona para a página de login
-    header("Location: login.php?msg=not_logged_in");
+    header("Location: login.php");
     exit();
 }
-
-// Recupera o nome do usuário da sessão
-$nome_usuario = $_SESSION["nome_usuario"];
-$fotoPath = $_SESSION["fotoPath"];
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@ $fotoPath = $_SESSION["fotoPath"];
 </head>
 
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
@@ -47,17 +48,24 @@ $fotoPath = $_SESSION["fotoPath"];
                                 role="button">Skins</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yasuo.php"
+                                role="button">Yasuo</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yone.php"
                                 role="button">Yone</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="habilidades.php"
                                 role="button">habilidades</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="inventario.php"
-                                role="button">inventário</a>
+                                role="button">Inventário</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary botao" aria aria-current="page" href="add-skins.php"
+                                role="button">Incluir Skins</a>
                         </li>
                     </ul>
                 </div>

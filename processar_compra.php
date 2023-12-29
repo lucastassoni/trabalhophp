@@ -92,7 +92,10 @@ if ($dinheiroUsuario >= $precoItem) {
     exit();
 } else {
     // Se o usuário não tiver dinheiro suficiente, redireciona para alguma página de aviso
-    header("Location: sem_dinheiro.php");
+    echo '<script>';
+    echo 'alert("Você não possui dinheiro para adquirir esta skin! Verifique seu saldo.");';
+    echo 'window.location.href = "skins.php";'; // Redireciona após clicar em OK
+    echo '</script>';
     exit();
 }
 

@@ -322,14 +322,13 @@ html::-moz-scrollbar-thumb:hover {
 .ionia-icon {
     border-bottom: 2px solid rgb(208, 168, 92);
     padding-bottom: 5px;
-    width: 30%;
-    max-width: 30%;
+    width: 40%;
+    max-width: 40%;
     max-height: 100%;
     object-fit: contain;
     aspect-ratio: 4/3;
     position: relative;
     z-index: 1;
-
 }
 
 .ionia-bg p {
@@ -936,4 +935,21 @@ html::-moz-scrollbar-thumb:hover {
     color: black;
     padding: 10px;
     border-radius: 8px;
+}
+
+.back-btn {
+    width: 8vh;
+    height: 7.1vh;
+    background-color: #292929;
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+.back-btn:hover {
+    background-color: rgb(194, 26, 26);
+    border: 1px solid rgb(160, 14, 14);
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
 }

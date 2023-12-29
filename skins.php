@@ -2,7 +2,7 @@
 session_start();
 
 
-include_once 'conexao.php';
+include("conexao.php");
 // Verifica se o usuário está logado
 if (!isset($_SESSION["nome_usuario"])) {
     // Se não estiver logado, redireciona para a página de login
@@ -10,13 +10,30 @@ if (!isset($_SESSION["nome_usuario"])) {
     exit();
 }
 
-// Recupera o nome do usuário da sessão
+
+$userID = $_SESSION["id_usuario"];
 $nome_usuario = $_SESSION["nome_usuario"];
 $fotoPath = $_SESSION["fotoPath"];
 
-
 $querySkins = "SELECT idskin, nome, descricao, preco, imagem FROM skins";
 $resultSkins = mysqli_query($conexao, $querySkins);
+
+$queryDinheiro = "SELECT dinheiro FROM usuario WHERE usuario.idusuario = $userID";
+$resultado = mysqli_query($conexao, $queryDinheiro);
+
+if ($resultado) {
+    $row = mysqli_fetch_assoc($resultado);
+
+    if ($row) {
+        $dinheiroTotal = $row['dinheiro'];
+        $dinheiroString = strval($dinheiroTotal); // Converte para string
+    } else {
+        echo "Usuário não encontrado ou sem dinheiro.";
+    }
+} else {
+    echo "Erro na consulta: " . mysqli_error($conexao);
+}
+
 
 if (!$resultSkins) {
     die("Erro na consulta ao banco de dados: " . mysqli_error($conexao));
@@ -39,7 +56,7 @@ if (!$resultSkins) {
 </head>
 
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
@@ -58,17 +75,24 @@ if (!$resultSkins) {
                                 role="button">Skins</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yasuo.php"
+                                role="button">Yasuo</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="yone.php"
                                 role="button">Yone</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="habilidades.php"
                                 role="button">habilidades</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="inventario.php"
-                                role="button">inventário</a>
+                                role="button">Inventário</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary botao" aria aria-current="page" href="add-skins.php"
+                                role="button">Incluir Skins</a>
                         </li>
                     </ul>
                 </div>
@@ -97,7 +121,6 @@ if (!$resultSkins) {
                 </div>
         </nav>
     </header>
-
     <video autoplay loop muted id="video-background">
         <source src="img/yasuo-video.mp4" type="video/mp4">
         <!-- Caso o formato MP4 não seja suportado, você pode adicionar outras extensões de vídeo aqui -->
@@ -105,165 +128,96 @@ if (!$resultSkins) {
 
     <div class="container-fluid" id="main-yasuo">
         <div class="row section">
-            <div class="col-md-8">
-                <div id="carouselExampleCaptions" class="carousel slide">
-                    <div class="carousel-indicators">
-                        <?php
-                    $indicatorCount = 0;
-                    while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
-                        $activeClass = ($indicatorCount == 0) ? 'active' : '';
-                        echo '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="' . $indicatorCount . '" class="' . $activeClass . '" aria-label="Slide ' . $indicatorCount . '"></button>';
-                        $indicatorCount++;
-                    }
-                    ?>
-                    </div>
+            <div class="col-md-8">   
+            <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+                <?php
+                $indicatorCount = 0;
+                while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
+                    $activeClass = ($indicatorCount == 0) ? 'active' : '';
+                    echo '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="' . $indicatorCount . '" class="' . $activeClass . '" aria-label="Slide ' . $indicatorCount . '"></button>';
+                    $indicatorCount++;
+                }
+                ?>
+            </div>
 
-                    <div class="carousel-inner">
-                        <?php
-                        mysqli_data_seek($resultSkins, 0);
-                        $itemCount = 0;
-                        while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
-                            $activeClass = ($itemCount == 0) ? 'active' : '';
-                            echo '<div class="carousel-item ' . $activeClass . '">';
-                            echo '<img src="' . $rowSkin['imagem'] . '" class="d-block w-100" alt="...">';
-                            echo '<div class="carousel-caption d-none d-md-block">';
-                            echo '<h5>' . $rowSkin['nome'] . '</h5>';
-                            echo '<p>' . $rowSkin['descricao'] . '</p>';
-                            echo '<a href="processar_compra.php?item=' . $rowSkin['nome'] . '" class="btn btn-primary">Comprar</a>';
-                            echo '</div>';
-                            echo '</div>';
-                            $itemCount++;
-                        }
-                        ?>
-                    </div>
+            <div class="carousel-inner">
+                <?php
+                mysqli_data_seek($resultSkins, 0);
+                $itemCount = 0;
+                while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
+                    $activeClass = ($itemCount == 0) ? 'active' : '';
+                    echo '<div class="carousel-item ' . $activeClass . '">';
+                    echo '<img src="' . $rowSkin['imagem'] . '" class="d-block w-100" alt="...">';
+                    echo '<div class="carousel-caption d-none d-md-block">';
+                    echo '<h5>' . $rowSkin['nome'] . '</h5>';
+                    echo '<p>' . $rowSkin['descricao'] . '</p>';
+                    echo '<a href="processar_compra.php?item=' . $rowSkin['nome'] . '" class="btn btn-primary">Comprar</a>';
+                    echo '<a href="remover_skin.php?id=' . $rowSkin['idskin'] . '" class="btn btn-danger">Excluir</a>'; // Botão Excluir
+                    echo '</div>';
+                    echo '</div>';
+                    $itemCount++;
+                }
+                ?>
+            </div>
 
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="prev">
-
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div> 
+                    
             </div>
 
             <div class="col-md-4 bg bg-yasuo">
                 <div class="row yasuo-header">
                     <div class="col-md-12 bg">
-                        <h5>BIOGRAFIA</h5>
+                        <h5>Loja do Invocador</h5>
                     </div>
                 </div>
                 <div class="row yasuo-div">
                     <div class="col-md-12">
                         <div class="yasuo-text">
-                            <p> Quando criança, Yasuo sempre acreditou no que os outros no seu vilarejo
-                                diziam sobre ele: no melhor dos casos, sua existência era um erro de juízo;
-                                no pior, ele era um erro que jamais seria desfeito. </p>
-
-                            <p> Como na maioria das afirmações dolorosas, havia certa verdade nelas. Sua mãe era
-                                uma viúva que já criava um filho sozinha quando o homem que viria a ser o pai de
-                                Yasuo soprou em sua vida como uma brisa outonal... E, assim como aquela estação
-                                solitária, ele foi embora antes mesmo que o cobertor do inverno ioniano caísse
-                                sobre a pequena família. </p>
-
-                            <p> O meio-irmão mais velho de Yasuo, Yone, era tudo o que o caçula não era: respeitoso,
-                                cuidadoso, responsável... mesmo assim, os dois eram inseparáveis. Quando as outras
-                                crianças provocavam Yasuo, Yone estava sempre lá para defendê-lo. Porém,
-                                o que Yasuo não tinha de paciência, compensava em determinação. Quando
-                                Yone iniciou seus estudos na renomada escola de espadachins do vilarejo,
-                                o jovem Yasuo o seguiu e esperou na frente da escola, sob a chuva das monções,
-                                até que os professores cederam e abriram os portões. </p>
-
-
-                            <p>
-                                Para desespero de seus novos colegas, Yasuo demonstrou um talento natural e, em
-                                pouco tempo, tornou-se o único estudante em muitas gerações a chamar a atenção do Ancião
-                                Souma, oúltimo mestre da lendária técnica do vento. O ancião percebeu o potencial de
-                                Yasuo, mas o impulsivopupilo recusou sua tutela, permanecendo tão indomado quanto uma
-                                ventania. Yone insistiu que o irmão deixasse de lado sua arrogância e deu a ele uma
-                                semente de bordo, a maior liçãoda escola em humildade. Na manhã seguinte, Yasuo aceitou
-                                a posição de
-                                aprendiz e guarda-costas pessoal de Souma. </p>
-
-                            <p> Quando as notícias da invasão noxiana chegaram à escola, alguns se inspiraram na grande
-                                batalha que havia ocorrido no Placídio de Navori, e logo todas as pessoas capazes de
-                                pegar em armas deixaram o vilarejo. Yasuo também queria se juntar à causa e enfrentar o
-                                inimigo com sua espada, mas, enquanto seu irmão e colegas de classe saíram para lutar,
-                                ele foi obrigado a ficar para trás e proteger os mais velhos. </p>
-
-                            <p> A invasão virou uma guerra. E, no fim, em uma fatídica noite de chuva, o som dos
-                                tambores da marcha noxiana chegou ao vale do outro lado. Yasuo abandonou seu posto,
-                                acreditando inocentemente que ele poderia virar o jogo. </p>
-
-                            <p> Mas, quando chegou, ele não viu batalha nenhuma, apenas uma cova aberta com centenas de
-                                cadáveres noxianos e ionianos. Algo terrível e não natural havia acontecido ali, algo
-                                que espada alguma poderia ter impedido. A própria terra parecia ter sido maculada. </p>
-
-                            <p> Assustado, Yasuo voltou à escola no dia seguinte, ao que foi cercado pelo resto dos
-                                alunos com espadas em punho. O Ancião Souma estava morto e Yasuo não só foi acusado de
-                                negligência, como também de assassinato. Ele percebeu que o verdadeiro assassino jamais
-                                seria punido se ele não agisse rápido e lutou contra os outros alunos para sair do
-                                cerco, mesmo
-                                sabendo que aquilo só confirmaria sua culpa aos olhos deles. </p>
-
-                            <p> Agora fugitivo na Ionia devastada pela guerra, Yasuo começou a buscar qualquer pista que
-                                o levasse ao assassino. No entanto, ele continuava sendo perseguido e caçado por seus
-                                antigos colegas e se viu obrigado a lutar ou morrer. Esse era um preço que ele estava
-                                disposto a pagar, até que um dia ele foi encontrado por aquele que mais temia: seu
-                                irmão, Yone. </p>
-
-                            <p> Em nome da honra, eles se estudaram. Quando suas espadas finalmente se tocaram, a magia
-                                do vento de Yasuo superou as lâminas de seu irmão e, com um único golpe de aço, o
-                                abateu. </p>
-
-                            <p> Yasuo implorou por perdão, mas Yone, já moribundo, falou sobre as técnicas de vento
-                                responsáveis pela morte do Ancião Souma, e que seu irmão era o único que as conhecia.
-                                Depois ele se calou para sempre, partindo sem nunca conceder perdão ao irmão. </p>
-
-                            <p> Sem mestre nem irmão, Yasuo vagueou pelas montanhas, ainda chocado, afogando a dor da
-                                guerra e da perda na bebida, como uma espada sem bainha. No meio da neve, ele encontrou
-                                Taliyah, uma jovem litomante shurimane que tinha fugido do exército noxiano. Yasuo viu
-                                nela uma aluna improvável e, em si mesmo, um professor ainda mais inusitado. Ele
-                                repassou a Taliyah os
-                                segredos da magia elemental, como o vento que molda pedras, e também as lições do Ancião
-                                Souma. </p>
-
-                            <p> Após ouvirem boatos sobre a ascensão de um deus-imperador shurimane, seus mundos
-                                mudaram. Yasuo se separou de Taliyah, mas não sem dar a ela a sagrada semente de bordo,
-                                que já havia lhe ensinado sua lição. Ela voltou para o deserto e Yasuo voltou para o seu
-                                vilarejo, determinado a reparar seus erros. </p>
-
-                            <p> Dentro das paredes de pedra do salão do conselho, revelou-se que a morte do Ancião Souma
-                                tinha sido um acidente causado pela exilada noxiana conhecida como Riven, e pelo qual
-                                ela sentia um profundo remorso. Mesmo assim, Yasuo não conseguiu se redimir pela decisão
-                                de abandonar seu mestre e, pior ainda, pela forma como essa decisão havia culminado na
-                                morte de Yone. </p>
-
-                            <p> Depois de algum tempo, Yasuo viajou para o festival do Florescer Espiritual em Weh’le,
-                                mesmo com pouca esperança de que os rituais de cura aliviassem seu coração. Lá,
-                                encontrou uma criatura demoníaca que queria devorá-lo,
-                                um azakana que se alimentava de dor e arrependimento. </p>
-
-                            <p> No entanto, um intruso mascarado interveio e atacou a criatura furiosamente. Naquele
-                                momento, Yasuo percebeu que aquele homem era Yone. </p>
-
-                            <p> Esperando que seu irmão se vingasse, Yasuo ficou surpreso quando Yone se despediu dele
-                                com uma breve e amarga bênção. </p>
-
-                            <p> Sem mais nenhuma ligação com as Primeiras Terras, Yasuo embarcou em uma nova aventura.
-                                Embora não saiba para onde será levado, o sentimento de culpa é a única coisa que prende
-                                o vento que ele carrega. </p>
+                            <p>Localizada no coração da cidade de Piltover, um dos lugares mais vibrantes e
+                                tecnologicamente avançados de Runeterra, ergue-se a Loja do Invocador. Escondida em uma
+                                rua estreita entre os prédios imponentes, sua fachada modesta e discreta esconde a
+                                vastidão de segredos e poderes arcanos que residem em seu interior. </p>
+                            <p>Os cidadãos de Piltover são conhecidos por sua paixão pela ciência e inovação, mas também
+                                valorizam profundamente o conhecimento antigo e a magia. A Loja do Invocador é um
+                                reflexo desse equilíbrio, um lugar onde o antigo e o moderno se encontram em perfeita
+                                harmonia. </p>
+                            <p>Os rumores sobre a origem da loja são diversos. Alguns dizem que ela foi criada há
+                                séculos por um grupo de sábios magos, cujos descendentes a mantêm até os dias atuais.
+                                Outros acreditam que sua fundação está ligada aos ancestrais dos invocadores, que a
+                                ergueram como um santuário para estudar e aprimorar suas habilidades mágicas. </p>
+                            <p>Seja qual for a verdadeira história por trás da Loja do Invocador, é inegável que seu
+                                interior é um espetáculo para os olhos curiosos. Prateleiras repletas de artefatos
+                                místicos, armas encantadas e itens poderosos capturam a atenção dos visitantes, enquanto
+                                os corredores parecem se estender em um labirinto interminável de possibilidades. </p>
+                            <p>Os atendentes da loja são indivíduos misteriosos, conhecedores não apenas dos produtos à
+                                venda, mas também dos segredos ocultos no tecido mágico de Runeterra. Eles orientam os
+                                invocadores a escolherem os itens que melhor se adequam às suas estratégias, alertando
+                                sobre os perigos de utilizar magias sem o devido conhecimento. </p>
+                            <p>Apesar de seu ambiente acolhedor, a Loja do Invocador não é apenas um local de comércio.
+                                É um refúgio para aqueles que buscam dominar os mistérios da magia e das batalhas em
+                                Summoner's Rift. Muitos afirmam que a loja tem um vínculo especial com o plano
+                                espiritual, capaz de se adaptar e fornecer itens que correspondem ao espírito de quem a
+                                procura.</p>
+                            <p>Assim, a Loja do Invocador continua a existir como um ponto de convergência entre os
+                                avanços tecnológicos de Piltover e a magia ancestral de Runeterra, oferecendo não apenas
+                                itens valiosos, mas também conhecimento e segredos para aqueles que estão dispostos a
+                                explorar seus corredores e desvendar suas histórias ocultas.</p>
                             </article>
                         </div>
                     </div>
                     <div class="row yasuo-div-function-ionia">
                         <div class="col-md-12 ionia-bg">
-                            <img class="ionia-icon" src="img/ionia-icon-removebg-preview.png" alt="">
-                            <p>IONIA</p>
+                            <img class="ionia-icon" src="img/essencia_loja.png" alt="">
+                            <p> <?php echo "$dinheiroString" ?></p>
                         </div>
                     </div>
                 </div>

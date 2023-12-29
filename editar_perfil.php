@@ -57,6 +57,9 @@ mysqli_close($conexao);
 <link type="image/png" rel="icon" href="img/LoL_icon.svg.png">
 
 <body class="bg-edit">
+    <button class="back-btn" type="button" id="meuBotao">
+        <p class="p-login-cadastro">Voltar</p><img class="arrow-login" src="img/arrow_left.png" alt="">
+    </button>
     <form class="main-editar" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?> " enctype="multipart/form-data">
         <h1 class="editar-msg">Edição de perfil</h1>
 
@@ -84,15 +87,11 @@ mysqli_close($conexao);
             <p class="p-editar">Salvar Alterações</p>
         </button>
 
-        <button class="back-button" type="button" id="meuBotao2">
-            <p class="p-editar">Voltar à Página Principal</p>
-        </button>
-
     </form>
 
     <script>
     // Obtém o elemento do botão pelo ID
-    var meuBotao = document.getElementById('meuBotao2');
+    var meuBotao = document.getElementById('meuBotao');
 
     // Adiciona um ouvinte de evento para o clique no botão
     meuBotao.addEventListener('click', function() {

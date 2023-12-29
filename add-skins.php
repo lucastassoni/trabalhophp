@@ -1,5 +1,12 @@
 <?php
-    
+session_start();
+
+if (!isset($_SESSION["nome_usuario"])) {
+    header("Location: login.php?msg=not_logged_in");
+    exit();
+}
+
+
 class Skin
 {
     private $nome;
@@ -73,6 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body class="bg-edit-3">
+    <button class="back-btn" type="button" id="meuBotao">
+        <p class="p-login-cadastro">Voltar</p><img class="arrow-login" src="img/arrow_left.png" alt="">
+    </button>
     <form class="main-editar" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <h1 class="editar-msg">Adicionar Skins</h1>
         <span class="p-editar">Nome:</span> <input class="login-input-editar" type="text" name="nome" required><br>
@@ -85,6 +95,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="p-editar">Inserir Skin</p>
         </button>
     </form>
+    <script>
+    // Obtém o elemento do botão pelo ID
+    var meuBotao = document.getElementById('meuBotao');
+
+    // Adiciona um ouvinte de evento para o clique no botão
+    meuBotao.addEventListener('click', function() {
+        // Redireciona para a URL desejada
+        window.location.href = 'principal.php';
+    });
+    </script>
 </body>
 
 </html>

@@ -40,6 +40,9 @@ mysqli_close($conexao);
 <link type="image/png" rel="icon" href="img/LoL_icon.svg.png">
 
 <body class="bg-edit">
+    <button class="back-btn" type="button" id="meuBotao">
+        <p class="p-login-cadastro">Voltar</p><img class="arrow-login" src="img/arrow_left.png" alt="">
+    </button>
     <form class="main-editar" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
         <h1 class="editar-msg">Excluir conta</h1>
@@ -50,6 +53,14 @@ mysqli_close($conexao);
     </form>
 
 
+    <script>
+    var meuBotao = document.getElementById('meuBotao');
+
+    meuBotao.addEventListener('click', function() {
+
+        window.location.href = 'principal.php';
+    });
+    </script>
 
 </body>
 

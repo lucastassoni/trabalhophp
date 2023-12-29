@@ -25,15 +25,10 @@ if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
         $idDoUsuario = mysqli_insert_id($conexao);
 
         // Armazena o ID do usuário na sessão
-        session_start();
         $_SESSION["id_usuario"] = $idDoUsuario;
 
         // Mensagem de alerta usando JavaScript
-        echo '<script>';
-        echo 'alert("Cadastro efetuado com sucesso, parabéns!");';
-        echo 'window.location.href = "login.php";'; // Redireciona após clicar em OK
-        echo '</script>';
-        exit();
+        $cadastroSuccess = true;
     } else {
         die("Conexão falhou: " . mysqli_connect_error());
     }
@@ -47,6 +42,21 @@ mysqli_close($conexao);
 <html lang="pt-br">
 
 <head>
+    <?php if (isset($cadastroSuccess) && $cadastroSuccess): ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: "success",
+            title: "Cadastro efetuado com sucesso!",
+            text: "Parabéns!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "login.php";
+            }
+        });
+    });
+    </script>
+    <?php endif; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
@@ -58,7 +68,7 @@ mysqli_close($conexao);
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Login</title>
+    <title>Cadastro</title>
 </head>
 
 <body>
