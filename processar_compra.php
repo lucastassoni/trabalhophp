@@ -1,11 +1,11 @@
 <?php
+header('Content-Type: application/json');
 session_start();
-
 include_once 'conexao.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION["nome_usuario"])) {
-    header("Location: login.php");
+    echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Você não está logado. Faça login para continuar.', 'icon' => 'error']);
     exit();
 }
 
@@ -17,7 +17,8 @@ $query = "SELECT idskin, preco FROM skins WHERE nome = ?";
 $stmt = mysqli_prepare($conexao, $query);
 
 if (!$stmt) {
-    die("Erro na preparação da consulta: " . mysqli_error($conexao));
+    echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Erro na preparação da consulta.', 'icon' => 'error']);
+    exit();
 }
 
 mysqli_stmt_bind_param($stmt, 's', $item);
@@ -26,11 +27,12 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if (!$result) {
-    die("Erro na consulta ao banco de dados: " . mysqli_error($conexao));
+    echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Erro na consulta ao banco de dados.', 'icon' => 'error']);
+    exit();
 }
 
 $row = mysqli_fetch_assoc($result);
-$idItem = $row['idskin'];  // Adiciona esta linha para obter o ID do item
+$idItem = $row['idskin']; // Adiciona esta linha para obter o ID do item
 $precoItem = $row['preco'];
 
 // Obtém o ID do usuário
@@ -41,7 +43,8 @@ $query = "SELECT dinheiro FROM usuario WHERE idusuario = ?";
 $stmt = mysqli_prepare($conexao, $query);
 
 if (!$stmt) {
-    die("Erro na preparação da consulta: " . mysqli_error($conexao));
+    echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Erro na preparação da consulta.', 'icon' => 'error']);
+    exit();
 }
 
 mysqli_stmt_bind_param($stmt, 'i', $userID);
@@ -50,7 +53,8 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if (!$result) {
-    die("Erro na consulta ao banco de dados: " . mysqli_error($conexao));
+    echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Erro na consulta ao banco de dados.', 'icon' => 'error']);
+    exit();
 }
 
 $row = mysqli_fetch_assoc($result);
@@ -64,7 +68,8 @@ if ($dinheiroUsuario >= $precoItem) {
     $stmt = mysqli_prepare($conexao, $atualizaQuery);
 
     if (!$stmt) {
-        die("Erro na preparação da atualização: " . mysqli_error($conexao));
+        echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Erro na preparação da atualização.', 'icon' => 'error']);
+        exit();
     }
 
     mysqli_stmt_bind_param($stmt, 'ii', $novoDinheiro, $userID);
@@ -75,30 +80,36 @@ if ($dinheiroUsuario >= $precoItem) {
     $stmt = mysqli_prepare($conexao, $inserirQuery);
 
     if (!$stmt) {
-        die("Erro na preparação da inserção no inventário: " . mysqli_error($conexao));
+        echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Erro na preparação da inserção no inventário.', 'icon' => 'error']);
+        exit();
     }
 
     mysqli_stmt_bind_param($stmt, 'ii', $userID, $idItem);
     mysqli_stmt_execute($stmt);
 
-    // Adicione aqui qualquer lógica adicional relacionada à compra do item
-
-    // Redireciona de volta à página do carrossel
-
-    echo '<script>';
-    echo 'alert("Skin adqurida com sucesso, verifique seu inventário! Sua página vai recarregar após sua confirmação.");';
-    echo 'window.location.href = "skins.php";'; // Redireciona após clicar em OK
-    echo '</script>';
+    // Responda com um JSON indicando o sucesso
+    echo json_encode(['success' => true, 'title' => 'Sucesso!', 'message' => 'Skin adquirida com sucesso. Verifique seu inventário!', 'icon' => 'success']);
     exit();
 } else {
-    // Se o usuário não tiver dinheiro suficiente, redireciona para alguma página de aviso
-    echo '<script>';
-    echo 'alert("Você não possui dinheiro para adquirir esta skin! Verifique seu saldo.");';
-    echo 'window.location.href = "skins.php";'; // Redireciona após clicar em OK
-    echo '</script>';
+    // Se o usuário não tiver dinheiro suficiente, responda com um JSON indicando o erro
+    echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Você não possui dinheiro para adquirir esta skin. Verifique seu saldo.', 'icon' => 'error']);
     exit();
 }
 
 // Feche a conexão com o banco de dados
 mysqli_close($conexao);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de Skin</title>
+
+    <!-- Inclua os arquivos necessários do SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+
+</body>
+</html>

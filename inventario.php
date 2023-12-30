@@ -32,6 +32,7 @@ if ($consulta === null) {
 <html>
 
 <head>
+    <link type="image/jpg" rel="icon" href="img/hextech_chest.png">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <title>Inventário de Skins</title>
     <style>

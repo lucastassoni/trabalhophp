@@ -4,22 +4,46 @@ session_start();
 unset($_SESSION["loginError"]);
 if (isset($_SESSION["nome_usuario"])) {
     header("Location: principal.php");
-    exit(); 
+    exit();
 }
 
-include("conexao.php");
+include "conexao.php";
+
+// Função para buscar o email do usuário no banco de dados
+function buscarEmailDoBanco($nome_usuario)
+{
+    global $conexao;
+
+    $consulta = mysqli_query($conexao, "SELECT email FROM usuario WHERE nome='$nome_usuario'");
+    $row = mysqli_fetch_assoc($consulta);
+
+    return $row["email"];
+}
+
+// Função para buscar a senha do usuário no banco de dados
+function buscarSenhaDoBanco($nome_usuario)
+{
+    global $conexao;
+
+    $consulta = mysqli_query($conexao, "SELECT senha FROM usuario WHERE nome='$nome_usuario'");
+    $row = mysqli_fetch_assoc($consulta);
+
+    return $row["senha"];
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["nome_usuario"]) && !empty($_POST["senha"])) {
     $nome_usuario = $_POST["nome_usuario"];
-    $senha = $_POST["senha"];   
-    
+    $senha = $_POST["senha"];
+
     $consulta = mysqli_query($conexao, "SELECT idusuario, foto FROM usuario WHERE nome='$nome_usuario' AND senha='$senha'");
 
     if (mysqli_num_rows($consulta) == 1) {
         $row = mysqli_fetch_assoc($consulta);
         $_SESSION["nome_usuario"] = $nome_usuario;
-        $_SESSION["id_usuario"] = $row["idusuario"];    
+        $_SESSION["id_usuario"] = $row["idusuario"];
         $_SESSION["fotoPath"] = $row["foto"];
+        $_SESSION["email"] = buscarEmailDoBanco($nome_usuario); // Adicione esta linha
+        $_SESSION["senha_usuario"] = buscarSenhaDoBanco($nome_usuario); // Ajuste aqui
 
         header("Location: principal.php");
         exit();
@@ -45,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["nome_usuario"]) && !e
         });
     });
     </script>
-    <?php unset($_SESSION["loginError"]); endif; ?>
+    <?php /* unset($_SESSION["loginError"]); */endif;?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
@@ -81,12 +105,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["nome_usuario"]) && !e
                     <div class="row user-input">
                         <div class="col-md-12 login-input-col">
                             <input class="login-input" type="text" placeholder="Nome de usuário" name="nome_usuario"
+                                value="<?php echo isset($_POST['nome_usuario']) ? htmlspecialchars($_POST['nome_usuario']) : ''; ?>"
                                 required>
                         </div>
                     </div>
                     <div class="row user-input">
                         <div class="col-md-12 login-input-col">
-                            <input class="login-input" type="password" placeholder="Senha" name="senha" required>
+                            <input class="login-input" type="password" placeholder="Senha" name="senha"
+                                value="<?php echo isset($_POST['senha']) ? htmlspecialchars($_POST['senha']) : ''; ?>"
+                                required>
+
                         </div>
                     </div>
                     <div class="row submit-area">

@@ -1,7 +1,7 @@
 <?php
 // Inicia a sessão (caso não tenha sido iniciada)
 session_start();
-
+include("conexao.php");
 $userID = $_SESSION["id_usuario"];
 $nome_usuario = $_SESSION["nome_usuario"];
 $fotoPath = $_SESSION["fotoPath"];
@@ -11,6 +11,20 @@ if (!isset($_SESSION["nome_usuario"])) {
     // Se não estiver logado, redireciona para a página de login
     header("Location: login.php");
     exit();
+}
+
+$queryDinheiro = "SELECT dinheiro FROM usuario WHERE usuario.idusuario = $userID";
+$resultado = mysqli_query($conexao, $queryDinheiro);
+
+if ($resultado) {
+    $row = mysqli_fetch_assoc($resultado);
+
+    if ($row) {
+        $dinheiroTotal = $row['dinheiro'];
+        $dinheiroString = strval($dinheiroTotal); // Converte para string
+    } else {
+        echo "Usuário não encontrado ou sem dinheiro.";
+    }
 }
 ?>
 
@@ -32,7 +46,7 @@ if (!isset($_SESSION["nome_usuario"])) {
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-dark header">
+    <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
                     <img class="home hover-image lol-center-icon" src="img/LoL_icon.svg.png" alt="Logo">
@@ -83,7 +97,7 @@ if (!isset($_SESSION["nome_usuario"])) {
                         <li class="nav-item dropdown op-class">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink"
                                 role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    style="width: 30px; height: 30px" src="./img/engrenagem.png" alt="opçoes">
+                                    style="width: 30px; height: 30px;" src="./img/engrenagem.png" alt="opçoes">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="editar_perfil.php">Editar Perfil</a>
@@ -92,6 +106,10 @@ if (!isset($_SESSION["nome_usuario"])) {
                                 <a class="dropdown-item" href="logout.php">Sair</a>
                             </div>
                         </li>
+                        <li class="li-money">
+                            <img class="money-icon" src="img/essencia_loja.png" alt="">
+                            <p class="money-p"> <?php echo "$dinheiroString" ?></p>
+                            </li>
                     </ul>
                 </div>
         </nav>
