@@ -1,1076 +1,910 @@
 @font-face {
-  font-family: lol-font;
-  src: url("../fonts/lol-font-2.ttf");
+     font-family: lol-font;
+     src: url("../fonts/lol-font-2.ttf");
 }
-
-@font-face {
-  font-family: "lol-font2";
-  src: url("../fonts/BenguiatStd-Book.otf");
+ @font-face {
+     font-family: "lol-font2";
+     src: url("../fonts/BenguiatStd-Book.otf");
 }
-
-html {
-  overflow: hidden;
+ html {
+     overflow: hidden;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  font-family: "lol-font" !important;
+ * {
+     margin: 0;
+     padding: 0;
+     border: 0;
+     font-size: 100%;
+     font: inherit;
+     vertical-align: baseline;
+     font-family: "lol-font" !important;
 }
-
-body {
-  box-sizing: border-box;
-  font-family: "lol-font" !important;
+ body {
+     box-sizing: border-box;
+     font-family: "lol-font" !important;
 }
-
-.bg-dark {
-  background-color: #111 !important;
+ .bg-dark {
+     background-color: #111 !important;
 }
-
-.header {
-  height: 10vh;
-  background-color: #111;
-  width: 100vw;
+ .header {
+     height: 10vh;
+     background-color: #111;
+     width: 100vw;
 }
-
-.nav-item {
-  margin-left: 1.5vw;
-  z-index: 2;
+ .nav-item {
+     margin-left: 1.5vw;
+     z-index: 2;
 }
-
-.botao {
-  height: 50px;
-  width: 150px;
-  background-color: #1100;
-  border-color: #1100;
-  padding: 10px;
-  text-align: center;
-  justify-content: center;
-  font-size: 1.3em;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: white;
+ .botao {
+     height: 50px;
+     width: 150px;
+     background-color: #1100;
+     border-color: #1100;
+     padding: 10px;
+     text-align: center;
+     justify-content: center;
+     font-size: 1.3em;
+     text-transform: uppercase;
+     font-weight: bold;
+     color: white;
 }
-
-.botao:hover {
-  background-color: #292929;
-  border-bottom: solid 4px rgb(208, 168, 92) !important;
-  border-color: transparent;
-  transition: 0.5s;
-  transform: scale(110%);
-  color: whitesmoke;
+ .botao:hover {
+     background-color: #292929;
+     border-bottom: solid 4px rgb(208, 168, 92) !important;
+     border-color: transparent;
+     transition: 0.5s;
+     transform: scale(110%);
+     color: whitesmoke;
 }
-
 /* rgb(11, 196, 226) */
-
-#main {
-  height: 84vh;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  overflow: auto;
-}
-
-footer {
-  height: 6vh;
-  background-color: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.section {
-  width: 95vw;
-  height: 75vh;
-  background-color: transparent;
-}
-
-.bg {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  box-sizing: border-box;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  text-align: justify;
-}
-
-.bg-yasuo {
-  background-color: rgba(17, 17, 17, 0.8);
-  border-radius: 16px;
-}
-
-.yasuo-header {
-  height: 5vh;
-  text-align: center;
-  border-bottom: solid 4px rgb(208, 168, 92);
-}
-
-.yasuo-div {
-  height: 65vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-}
-
-.yasuo-text {
-  padding: 10% 10px 10% 10px;
-  text-align: justify;
-  color: white;
-  font-size: 1em;
-  overflow: auto;
-  overflow-x: hidden;
-  height: 50vh;
-}
-
-.img-lutador {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: rgb(208, 168, 92);
-}
-
-#fighter {
-  width: 15%;
-  object-fit: contain;
-  aspect-ratio: 4/3;
-}
-
-.lol-center-icon {
-  width: 3vw;
-  height: 5vh;
-  object-fit: contain;
-}
-
-.lol-center-icon2 {
-  width: 5vw;
-  height: 5vh;
-  object-fit: contain;
-}
-
-.video-home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 69vh;
-  overflow: hidden;
-}
-
-.riot-logo {
-  width: 13%;
-  object-fit: contain;
-  aspect-ratio: 4/3;
-  align-items: center;
-}
-
-.riot-logo:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
-}
-
-.riot-a {
-  display: flex;
-  justify-content: center;
-}
-
-.hover-image {
-  transition: transform 0.3s ease-in-out;
-}
-
-.hovered {
-  transform: scale(1.05);
-}
-
-.yasuo-div-function {
-  width: 100%;
-  height: 100%;
-}
-
-#main-yasuo {
-  height: 84vh;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  overflow: hidden;
-}
-
-.carousel-inner {
-  border-radius: 16px;
-}
-
-#main-yone {
-  height: 84vh;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  overflow: hidden;
-}
-
-.carousel-inner {
-  height: 75vh;
-}
-
-.d-block {
-  height: 75vh;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: rgba(17, 17, 17, 1);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #555;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #292929;
-}
-
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #292929 rgba(17, 17, 17, 1);
-}
-
-html::-moz-scrollbar-track {
-  background-color: rgba(17, 17, 17, 1);
-}
-
-html::-moz-scrollbar-thumb {
-  background-color: #555;
-}
-
-html::-moz-scrollbar-thumb:hover {
-  background-color: #292929;
-}
-
-.preview-image {
-  width: 50px;
-  /* Defina o tamanho desejado */
-  height: auto;
-}
-
-.yasuo-div-function-ionia {
-  width: 65%;
-  height: 25%;
-  padding: 3%;
-  margin: 0;
-  align-items: center;
-  border-radius: 14px;
-  justify-content: center;
-}
-
-.ionia-bg {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 14px;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.ionia-bg::before {
-  content: "";
-  background-image: url("./img/ionia-bg.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.5;
-  border-radius: inherit;
-}
-
-.ionia-icon {
-  border-bottom: 2px solid rgb(208, 168, 92);
-  padding-bottom: 5px;
-  width: 40%;
-  max-width: 40%;
-  max-height: 100%;
-  object-fit: contain;
-  aspect-ratio: 4/3;
-  position: relative;
-  z-index: 1;
-}
-
-.ionia-bg p {
-  font-size: 1em !important;
-  margin: 0;
-  margin-bottom: 0;
-  position: relative;
-  z-index: 1;
-  color: rgb(226, 226, 226);
-  opacity: 0.89;
-}
-
-#video-background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-}
-
-@media (max-width: 991px) {
-  .yasuo-div {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  #main-yasuo,
-  #main-yone {
-    overflow: auto !important;
-  }
-
-  .bg-yasuo {
-    margin-top: 10px;
-  }
-
-  .lol-center-icon {
-    width: 6vw;
-    height: 5vh;
-    object-fit: contain;
-    image-rendering: optimizeQuality;
-  }
-
-  .lol-center-icon2 {
-    width: 10vw;
-    height: 5vh;
-    object-fit: contain;
-    image-rendering: optimizeQuality;
-  }
-
-  .botao {
-    float: right;
-    text-align: right;
-    border-bottom: none;
-    border-radius: 0;
-    border-right: solid 4px rgb(208, 168, 92) !important;
-    margin-top: 10px;
-  }
-}
-
-.image-area {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.linha-test-video {
-  display: flex;
-  justify-content: center;
-}
-
-.elemento {
-  width: 200px;
-  /* ajuste o tamanho conforme necessário */
-  height: 200px;
-  /* ajuste o tamanho conforme necessário */
-  background-color: #ccc;
-  cursor: pointer;
-}
-
-.on-habilidades {
-  width: 95vw;
-  height: 75vh;
-  background-color: transparent;
-  display: flex;
-}
-
-.linha-test {
-  height: 100%;
-}
-
-#main-habilidades {
-  height: 84vh;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  overflow: hidden;
-}
-
-.hb-yone-yasuo {
-  height: 100%;
-}
-
-.video-hb {
-  width: 25vw;
-  height: 10vh;
-}
-
-.coluninha {
-  height: 12.5vh;
-  display: flex;
-}
-
-.icon {
-  width: 90%;
-  height: 90%;
-  border-radius: 12px !important;
-}
-
-.skills {
-  margin-top: 10%;
-}
-
-.pad-yasuo {
-  margin-left: 9%;
-}
-
-.skills:hover {
-  opacity: 0.7;
-}
-
-#video-explicativo-p,
-#video-explicativo-yasuo-p {
-  width: 100%;
-  border-radius: 12px;
-}
-
-#fundo-highlight {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-}
-
-#back-yone-p {
-  background-image: url("../img/Icon_Yone_Passive.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yone-q {
-  background-image: url("../img/Icon_Yone_Q.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yone-w {
-  background-image: url("../img/Icon_Yone_W.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yone-e {
-  background-image: url("../img/Icon_Yone_E.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yone-r {
-  background-image: url("../img/Icon_Yone_R.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yasuo-p {
-  background-image: url("../img/yasuo-p.webp");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yasuo-q {
-  background-image: url("../img/yasuo-q.webp");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yasuo-w {
-  background-image: url("../img/yasuo-w.webp");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yasuo-e {
-  background-image: url("../img/yasuo-e.webp");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#back-yasuo-r {
-  background-image: url("../img/yasuo-r.webp");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.modal-header,
-.modal-title,
-.modal-body {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: baseline !important;
-  font-weight: bolder;
-  font-family: lol-font;
-  color: #ccc;
-}
-
-.modal-footer,
-.modal-header {
-  font-family: lol-font;
-  font-weight: bolder;
-  background-color: #292929;
-}
-
-.modal-footer {
-  border-top: 1px solid rgb(131, 131, 131) !important;
-}
-
-.modal-header {
-  border-bottom: 1px solid rgb(131, 131, 131) !important;
-}
-
-#modalyone1 {
-  background-image: url("../img/IoniaHeader2.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyone2 {
-  background-image: url("../img/IoniaHeader3.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyone3 {
-  background-image: url("../img/IoniaHeader4.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyone4 {
-  background-image: url("../img/IoniaHeader5.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyone5 {
-  background-image: url("../img/IoniaHeader6.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyasuo1 {
-  background-image: url("../img/IoniaHeader1.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyasuo2 {
-  background-image: url("../img/IoniaHeader7.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyasuo3 {
-  background-image: url("../img/IoniaHeader8.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyasuo4 {
-  background-image: url("../img/IoniaHeader9.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#modalyasuo5 {
-  background-image: url("../img/IoniaHeader10.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.main-login {
-  height: 100vh;
-  width: 100vw;
-}
-
-.login-area {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(17, 17, 17, 0.8);
-}
-
-.login-logo {
-  height: 25%;
-  width: auto;
-  align-items: center;
-}
-
-.login-col {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: auto;
-  width: auto;
-}
-
-.lol-logo-login2-icon {
-  width: 7vw;
-  height: 8.5vh;
-}
-
-.lol-logo-login2 {
-  width: 12vw;
-  height: 9.9vh;
-}
-
-#login-text {
-  font-family: "lol-font" !important;
-  font-size: 2em;
-  color: #c29e32;
-  transition: 0.3s ease-in-out;
-}
-
-.text-row {
-  height: 5%;
-}
-
-.login-text-col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
-
-#login-text:hover {
-  color: #c29e32;
-  text-shadow: #c29e32 0px 0px 10px;
-  border-left: none;
-}
-
-.login-input-col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
-
-.user-input {
-  height: 20%;
-}
-
-.login-input {
-  height: 40%;
-  width: 70%;
-  border-radius: 12px;
-  border: none;
-  background-color: #292929;
-  color: #ccc;
-  font-family: "lol-font" !important;
-  font-size: 1.5em;
-  padding-left: 10px;
-  transition: 0.3s ease-in-out;
-}
-
-.login-input:hover {
-  background-color: #292929;
-  color: #ccc;
-  border: 1px solid #c29e32;
-  transition: 0.3s ease-in-out;
-}
-
-.submit-area {
-  width: auto;
-  height: 30%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-}
-
-.submit-btn {
-  width: 17vh;
-  height: 7.1vh;
-  background-color: #292929;
-  border-radius: 12px;
-  transition: 0.3s ease-in-out;
-}
-
-.p-login-cadastro {
-  margin-bottom: 0;
-  color: #555;
-  font-family: "lol-font" !important;
-  font-size: 1.1em;
-}
-
-.submit-col {
-  width: auto;
-  height: 100%;
-}
-
-.submit-btn:hover {
-  background-color: rgb(194, 26, 26);
-  border: 1px solid rgb(160, 14, 14);
-  transition: 0.3s ease-in-out;
-}
-
-.arrow-login {
-  width: 4vw;
-  height: 4vh;
-  object-fit: contain;
-  text-align: center;
-  transition: 0.3s ease-in-out;
-  opacity: 0.7;
-}
-
-#background-video-login {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-.sair-text {
-  color: white;
-}
-
-#Cadastro-text {
-  font-family: "lol-font" !important;
-  font-size: 100em;
-  color: #c29e32;
-  width: 4vw;
-  height: 4vh;
-  object-fit: center;
-  text-align: center;
-  opacity: 0.7;
-}
-
-.submit-col-cadastro {
-  width: auto;
-  height: 100%;
-}
-
-.op-class {
-  margin-left: 0;
-}
-
-.main-editar {
-  width: 30%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-}
-
-.save-button {
-  height: 5vh;
-  width: 10vw;
-  margin-bottom: 5%;
-  border: solid 1px black;
-  background-color: #292929;
-  border-radius: 8px;
-  transition: 0.3s ease-in-out;
-  cursor: pointer !important;
-}
-
-.back-button {
-  height: 7vh;
-  width: 10vw;
-  margin-bottom: 10%;
-  border: solid 1px black;
-  background-color: #292929;
-  border-radius: 8px;
-  transition: 0.3s ease-in-out;
-  cursor: pointer !important;
-}
-
-.back-button:hover,
-.save-button:hover {
-  background-color: rgb(194, 26, 26);
-  border: 1px solid rgb(160, 14, 14);
-  color: black;
-  transition: 0.3s ease-in-out;
-  cursor: pointer !important;
-}
-
-.p-editar {
-  font-family: "lol-font" !important;
-  font-size: 1.1em;
-  color: #555;
-}
-
-.login-input-editar {
-  height: 40%;
-  width: 70%;
-  border-radius: 12px;
-  border: none;
-  background-color: #292929;
-  color: #ccc;
-  font-family: "lol-font" !important;
-  font-size: 1.5em;
-  padding-left: 10px;
-  transition: 0.3s ease-in-out;
-  margin-bottom: 3%;
-}
-
-.editar-msg {
-  font-family: "lol-font" !important;
-  font-size: 2em;
-  color: rgb(163, 163, 163);
-  margin-bottom: 3%;
-  margin-top: 5%;
-  text-align: center;
-}
-
-.bg-edit {
-  background-image: url("../img/bg-edit.png");
-  height: 100vh;
-  width: 100vw;
-  background-repeat: no-repeat;
-}
-
-.bg-edit-2 {
-  background-image: url("../img/bg-exclude.jpg");
-  height: 100vh;
-  width: 100vw;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-.bg-edit-3 {
-  background-image: url("../img/bg-add.jpg");
-  height: 100vh;
-  width: 100vw;
-  background-repeat: no-repeat;
-}
-
-.bg-inv {
-  background-image: url("../img/bg-inv_auto_x2.jpg");
-  height: 100vh;
-  width: 100vw;
-  background-repeat: no-repeat;
-}
-
-.testando123 {
-  background-color: white;
-  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
-  margin-top: 5%;
-  color: black;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.back-btn {
-  width: 8vh;
-  height: 7.1vh;
-  background-color: #292929;
-  border-radius: 12px;
-  transition: 0.3s ease-in-out;
-  margin-top: 1%;
-  margin-left: 1%;
-}
-
-.back-btn:hover {
-  background-color: rgb(194, 26, 26);
-  border: 1px solid rgb(160, 14, 14);
-  transition: 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.money-icon {
-  width: 50%;
-  max-width: 50%;
-  max-height: 100%;
-  object-fit: contain;
-  aspect-ratio: 4/3;
-}
-
-.li-money {
-  width: 20%;
-  display: flex;
-  align-items: center;
-}
-
-.money-p {
-  font-family: "lol-font" !important;
-  font-size: 0.8em;
-  color: rgb(226, 226, 226);
-  margin-bottom: 0;
-}
-
-#navbarTogglerDemo02 {
-  margin-left: 3%;
-}
-
-.btn-buy-ex:nth-of-type(1) {
-  background-color: rgba(0, 128, 0, 0.363);
-  margin-right: 5%;
-  border-color: rgba(0, 128, 0, 0.363);
-  color: #ccc;
-}
-
-.btn-buy-ex:nth-of-type(1):hover {
-  background-color: rgba(2, 165, 2, 0.904);
-  border-color: rgba(2, 165, 2, 0.904);
-  color: rgb(255, 255, 255);
-}
-
-.btn-buy-ex:nth-of-type(2) {
-  margin-left: 5%;
-  background-color: rgba(128, 0, 0, 0.363) !important;
-  border-color: rgba(128, 0, 0, 0.363) !important;
-  color: #ccc;
-}
-
-.btn-buy-ex:nth-of-type(2):hover {
-  background-color: rgba(165, 2, 2, 0.904) !important;
-  border-color: rgba(165, 2, 2, 0.904) !important;
-  color: rgb(255, 255, 255);
-}
-
-.welcome-message {
-  display: none;
-  position: fixed;
-  top: 15%; /* Ajuste a posição vertical conforme necessário */
-  left: 50%;
-  border-radius: 5px;
-  transform: translateX(-50%);
-  padding: 10px; /* Adiciona algum espaçamento interno */
-  background-color: #333; /* Cinza escuro */
-  color: white;
-  font-family: "lol-font" !important;
-  font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
-  z-index: 1000;
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-  min-width: 10vw;
-  text-align: center;
-  max-width: 90vw; /* Define a largura máxima como 90% da largura da tela */
-  white-space: nowrap; /* Evita que o texto quebre em várias linhas */
-  overflow: hidden; /* Oculta qualquer parte do texto que não caiba */
-  text-overflow: ellipsis; /* Adiciona reticências (...) para indicar que há mais texto oculto */
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-  border-bottom: 2px solid #555;
-  border-left: 2px solid #555;
-}
-
-.welcome-message-border {
-  border-bottom: 1px solid rgb(208, 168, 92);
-  padding-bottom: 5px;
-}
-
-
-
-/* Adiciona uma classe para animar o fade-out */
-.fade-out {
-  opacity: 0;
-}
-
-.btn-add-money {
-  background-color: #292929;
-  border-color: #292929;
-  color: #ccc;
-  transition: 0.3s ease-in-out;
-  margin-left: 5%;
-  width: 10%;
-  height: 15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.ul-foto {
-  margin-left: 4vw !important;
-}
-
-.main-editar-inv {
-    width: 84%;
-  margin: 0 auto;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #333333;
-  box-shadow: 0px 0px 10px 0px rgba(78, 78, 78, 0.75);
-  overflow-y: auto;
-    max-height: 80%;
-}
-
-.skin-image {
-        width: 150px;
-        height: 150px;
-        margin: 5px;
-        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
-        border-radius: 5px;
-        background-color: #fff;
-        margin-bottom: 1%;
-        object-fit: cover;
+ #main {
+     height: 84vh;
+     align-items: center;
+     justify-content: center;
+     display: flex;
+     overflow: auto;
+}
+ footer {
+     height: 6vh;
+     background-color: #111;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+ .section {
+     width: 95vw;
+     height: 75vh;
+     background-color: transparent;
+}
+ .bg {
+     display: flex;
+     flex-direction: column;
+     color: white;
+     box-sizing: border-box;
+     overflow: hidden;
+     justify-content: center;
+     align-items: center;
+     text-align: justify;
+}
+ .bg-yasuo {
+     background-color: rgba(17, 17, 17, 0.8);
+     border-radius: 16px;
+}
+ .yasuo-header {
+     height: 5vh;
+     text-align: center;
+     border-bottom: solid 4px rgb(208, 168, 92);
+}
+ .yasuo-div {
+     height: 65vh;
+     overflow: hidden;
+     display: flex;
+     justify-content: center;
+}
+ .yasuo-text {
+     padding: 10% 10px 10% 10px;
+     text-align: justify;
+     color: white;
+     font-size: 1em;
+     overflow: auto;
+     overflow-x: hidden;
+     height: 50vh;
+}
+ .img-lutador {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     color: rgb(208, 168, 92);
+}
+ #fighter {
+     width: 15%;
+     object-fit: contain;
+     aspect-ratio: 4/3;
+}
+ .lol-center-icon {
+     width: 3vw;
+     height: 5vh;
+     object-fit: contain;
+}
+ .lol-center-icon2 {
+     width: 5vw;
+     height: 5vh;
+     object-fit: contain;
+}
+ .video-home {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 69vh;
+     overflow: hidden;
+}
+ .riot-logo {
+     width: 13%;
+     object-fit: contain;
+     aspect-ratio: 4/3;
+     align-items: center;
+}
+ .riot-logo:hover {
+     transform: scale(1.05);
+     transition: transform 0.3s ease-in-out;
+}
+ .riot-a {
+     display: flex;
+     justify-content: center;
+}
+ .hover-image {
+     transition: transform 0.3s ease-in-out;
+}
+ .hovered {
+     transform: scale(1.05);
+}
+ .yasuo-div-function {
+     width: 100%;
+     height: 100%;
+}
+ #main-yasuo {
+     height: 84vh;
+     align-items: center;
+     justify-content: center;
+     display: flex;
+     overflow: hidden;
+}
+ .carousel-inner {
+     border-radius: 16px;
+}
+ #main-yone {
+     height: 84vh;
+     align-items: center;
+     justify-content: center;
+     display: flex;
+     overflow: hidden;
+}
+ .carousel-inner {
+     height: 75vh;
+}
+ .d-block {
+     height: 75vh;
+}
+ ::-webkit-scrollbar {
+     width: 10px;
+}
+ ::-webkit-scrollbar-track {
+     background-color: rgba(17, 17, 17, 1);
+}
+ ::-webkit-scrollbar-thumb {
+     background-color: #555;
+}
+ ::-webkit-scrollbar-thumb:hover {
+     background-color: #292929;
+}
+ html {
+     scrollbar-width: thin;
+     scrollbar-color: #292929 rgba(17, 17, 17, 1);
+}
+ html::-moz-scrollbar-track {
+     background-color: rgba(17, 17, 17, 1);
+}
+ html::-moz-scrollbar-thumb {
+     background-color: #555;
+}
+ html::-moz-scrollbar-thumb:hover {
+     background-color: #292929;
+}
+ .preview-image {
+     width: 50px;
+     height: auto;
+}
+ .yasuo-div-function-ionia {
+     width: 65%;
+     height: 25%;
+     padding: 3%;
+     margin: 0;
+     align-items: center;
+     border-radius: 14px;
+     justify-content: center;
+}
+ .ionia-bg {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     border-radius: 14px;
+     align-items: center;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+}
+ .ionia-bg::before {
+     content: "";
+     background-image: url("./img/ionia-bg.jpg");
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     width: 100%;
+     height: 100%;
+     position: absolute;
+     top: 0;
+     left: 0;
+     opacity: 0.5;
+     border-radius: inherit;
+}
+ .ionia-icon {
+     border-bottom: 2px solid rgb(208, 168, 92);
+     padding-bottom: 5px;
+     width: 40%;
+     max-width: 40%;
+     max-height: 100%;
+     object-fit: contain;
+     aspect-ratio: 4/3;
+     position: relative;
+     z-index: 1;
+}
+ .ionia-bg p {
+     font-size: 1em !important;
+     margin: 0;
+     margin-bottom: 0;
+     position: relative;
+     z-index: 1;
+     color: rgb(226, 226, 226);
+     opacity: 0.89;
+}
+ #video-background {
+     position: fixed;
+     width: 100vw;
+     height: 100vh;
+     object-fit: cover;
+     z-index: -1;
+}
+ @media (max-width: 991px) {
+     .yasuo-div {
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
     }
-
-    .skin-gallery {
-    overflow-y: auto;
-    max-height: 100%; /* Isso permite que a galeria use a altura máxima da .main-editar-inv */
-    display: flex;
-    flex-wrap: wrap;
+     #main-yasuo, #main-yone {
+         overflow: auto !important;
     }
-
-    .skin-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px; /* Espaçamento entre as skins */
-            margin-left: 1%;
-        }
-
-        .sell-button {
-            position: absolute;
-            bottom: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 128, 0, 0.363);
-            padding: 5px 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            border-color: rgba(0, 128, 0, 0.363);
-            color: #ccc;
-            font-size: 12px;
-            font-family: 'lol-font' !important;
-        }
-
-
-.sell-button:hover {
-  background-color: rgba(2, 165, 2, 0.904);
-  border-color: rgba(2, 165, 2, 0.904);
-  color: rgb(255, 255, 255);
+     .bg-yasuo {
+         margin-top: 10px;
+    }
+     .lol-center-icon {
+         width: 6vw;
+         height: 5vh;
+         object-fit: contain;
+         image-rendering: optimizeQuality;
+    }
+     .lol-center-icon2 {
+         width: 10vw;
+         height: 5vh;
+         object-fit: contain;
+         image-rendering: optimizeQuality;
+    }
+     .botao {
+         float: right;
+         text-align: right;
+         border-bottom: none;
+         border-radius: 0;
+         border-right: solid 4px rgb(208, 168, 92) !important;
+         margin-top: 10px;
+    }
 }
-
-.editar-msg-bugado {
-  font-family: "lol-font" !important;
-  font-size: 2em;
-  color: rgb(163, 163, 163);
-  margin-bottom: 3%;
-  margin-top: 5%;
-  text-align: center;
- transform: translate(90%, -50%);
+ .image-area {
+     width: 100%;
+     height: 100%;
+     position: relative;
+     overflow: hidden;
+}
+ .linha-test-video {
+     display: flex;
+     justify-content: center;
+}
+ .elemento {
+     width: 200px;
+     height: 200px;
+     background-color: #ccc;
+     cursor: pointer;
+}
+ .on-habilidades {
+     width: 95vw;
+     height: 75vh;
+     background-color: transparent;
+     display: flex;
+}
+ .linha-test {
+     height: 100%;
+}
+ #main-habilidades {
+     height: 84vh;
+     align-items: center;
+     justify-content: center;
+     display: flex;
+     overflow: hidden;
+}
+ .hb-yone-yasuo {
+     height: 100%;
+}
+ .video-hb {
+     width: 25vw;
+     height: 10vh;
+}
+ .coluninha {
+     height: 12.5vh;
+     display: flex;
+}
+ .icon {
+     width: 90%;
+     height: 90%;
+     border-radius: 12px !important;
+}
+ .skills {
+     margin-top: 10%;
+}
+ .pad-yasuo {
+     margin-left: 9%;
+}
+ .skills:hover {
+     opacity: 0.7;
+}
+ #video-explicativo-p, #video-explicativo-yasuo-p {
+     width: 100%;
+     border-radius: 12px;
+}
+ #fundo-highlight {
+     position: fixed;
+     width: 100vw;
+     height: 100vh;
+     object-fit: cover;
+     z-index: -1;
+}
+ #back-yone-p {
+     background-image: url("../img/Icon_Yone_Passive.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yone-q {
+     background-image: url("../img/Icon_Yone_Q.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yone-w {
+     background-image: url("../img/Icon_Yone_W.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yone-e {
+     background-image: url("../img/Icon_Yone_E.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yone-r {
+     background-image: url("../img/Icon_Yone_R.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yasuo-p {
+     background-image: url("../img/yasuo-p.webp");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yasuo-q {
+     background-image: url("../img/yasuo-q.webp");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yasuo-w {
+     background-image: url("../img/yasuo-w.webp");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yasuo-e {
+     background-image: url("../img/yasuo-e.webp");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #back-yasuo-r {
+     background-image: url("../img/yasuo-r.webp");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ .modal-header, .modal-title, .modal-body {
+     display: flex !important;
+     flex-direction: column !important;
+     align-items: baseline !important;
+     font-weight: bolder;
+     font-family: lol-font;
+     color: #ccc;
+}
+ .modal-footer, .modal-header {
+     font-family: lol-font;
+     font-weight: bolder;
+     background-color: #292929;
+}
+ .modal-footer {
+     border-top: 1px solid rgb(131, 131, 131) !important;
+}
+ .modal-header {
+     border-bottom: 1px solid rgb(131, 131, 131) !important;
+}
+ #modalyone1 {
+     background-image: url("../img/IoniaHeader2.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyone2 {
+     background-image: url("../img/IoniaHeader3.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyone3 {
+     background-image: url("../img/IoniaHeader4.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyone4 {
+     background-image: url("../img/IoniaHeader5.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyone5 {
+     background-image: url("../img/IoniaHeader6.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyasuo1 {
+     background-image: url("../img/IoniaHeader1.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyasuo2 {
+     background-image: url("../img/IoniaHeader7.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyasuo3 {
+     background-image: url("../img/IoniaHeader8.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyasuo4 {
+     background-image: url("../img/IoniaHeader9.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ #modalyasuo5 {
+     background-image: url("../img/IoniaHeader10.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
+ .main-login {
+     height: 100vh;
+     width: 100vw;
+}
+ .login-area {
+     height: 100%;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     background-color: rgba(17, 17, 17, 0.8);
+}
+ .login-logo {
+     height: 25%;
+     width: auto;
+     align-items: center;
+}
+ .login-col {
+     justify-content: center;
+     align-items: center;
+     display: flex;
+     height: auto;
+     width: auto;
+}
+ .lol-logo-login2-icon {
+     width: 7vw;
+     height: 8.5vh;
+}
+ .lol-logo-login2 {
+     width: 12vw;
+     height: 9.9vh;
+}
+ #login-text {
+     font-family: "lol-font" !important;
+     font-size: 2em;
+     color: #c29e32;
+     transition: 0.3s ease-in-out;
+}
+ .text-row {
+     height: 5%;
+}
+ .login-text-col {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100%;
+     width: 100%;
+}
+ #login-text:hover {
+     color: #c29e32;
+     text-shadow: #c29e32 0px 0px 10px;
+     border-left: none;
+}
+ .login-input-col {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100%;
+     width: 100%;
+}
+ .user-input {
+     height: 20%;
+}
+ .login-input {
+     height: 40%;
+     width: 70%;
+     border-radius: 12px;
+     border: none;
+     background-color: #292929;
+     color: #ccc;
+     font-family: "lol-font" !important;
+     font-size: 1.5em;
+     padding-left: 10px;
+     transition: 0.3s ease-in-out;
+}
+ .login-input:hover {
+     background-color: #292929;
+     color: #ccc;
+     border: 1px solid #c29e32;
+     transition: 0.3s ease-in-out;
+}
+ .submit-area {
+     width: auto;
+     height: 30%;
+     display: flex;
+     align-items: center;
+     text-align: center;
+}
+ .submit-btn {
+     width: 17vh;
+     height: 7.1vh;
+     background-color: #292929;
+     border-radius: 12px;
+     transition: 0.3s ease-in-out;
+}
+ .p-login-cadastro {
+     margin-bottom: 0;
+     color: #555;
+     font-family: "lol-font" !important;
+     font-size: 1.1em;
+}
+ .submit-col {
+     width: auto;
+     height: 100%;
+}
+ .submit-btn:hover {
+     background-color: rgb(194, 26, 26);
+     border: 1px solid rgb(160, 14, 14);
+     transition: 0.3s ease-in-out;
+}
+ .arrow-login {
+     width: 4vw;
+     height: 4vh;
+     object-fit: contain;
+     text-align: center;
+     transition: 0.3s ease-in-out;
+     opacity: 0.7;
+}
+ #background-video-login {
+     object-fit: cover;
+     width: 100%;
+     height: 100%;
+     position: fixed;
+     top: 0;
+     left: 0;
+     z-index: -1;
+}
+ .sair-text {
+     color: white;
+}
+ #Cadastro-text {
+     font-family: "lol-font" !important;
+     font-size: 100em;
+     color: #c29e32;
+     width: 4vw;
+     height: 4vh;
+     object-fit: center;
+     text-align: center;
+     opacity: 0.7;
+}
+ .submit-col-cadastro {
+     width: auto;
+     height: 100%;
+}
+ .op-class {
+     margin-left: 0;
+}
+ .main-editar {
+     width: 30%;
+     margin: 0 auto;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     text-align: center;
+     position: absolute;
+     top: 40%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: white;
+     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+ .save-button {
+     height: 5vh;
+     width: 10vw;
+     margin-bottom: 5%;
+     border: solid 1px black;
+     background-color: #292929;
+     border-radius: 8px;
+     transition: 0.3s ease-in-out;
+     cursor: pointer !important;
+}
+ .back-button {
+     height: 7vh;
+     width: 10vw;
+     margin-bottom: 10%;
+     border: solid 1px black;
+     background-color: #292929;
+     border-radius: 8px;
+     transition: 0.3s ease-in-out;
+     cursor: pointer !important;
+}
+ .back-button:hover, .save-button:hover {
+     background-color: rgb(194, 26, 26);
+     border: 1px solid rgb(160, 14, 14);
+     color: black;
+     transition: 0.3s ease-in-out;
+     cursor: pointer !important;
+}
+ .p-editar {
+     font-family: "lol-font" !important;
+     font-size: 1.1em;
+     color: #555;
+}
+ .login-input-editar {
+     height: 40%;
+     width: 70%;
+     border-radius: 12px;
+     border: none;
+     background-color: #292929;
+     color: #ccc;
+     font-family: "lol-font" !important;
+     font-size: 1.5em;
+     padding-left: 10px;
+     transition: 0.3s ease-in-out;
+     margin-bottom: 3%;
+}
+ .editar-msg {
+     font-family: "lol-font" !important;
+     font-size: 2em;
+     color: rgb(163, 163, 163);
+     margin-bottom: 3%;
+     margin-top: 5%;
+     text-align: center;
+}
+ .bg-edit {
+     background-image: url("../img/bg-edit.png");
+     height: 100vh;
+     width: 100vw;
+     background-repeat: no-repeat;
+}
+ .bg-edit-2 {
+     background-image: url("../img/bg-exclude.jpg");
+     height: 100vh;
+     width: 100vw;
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+}
+ .bg-edit-3 {
+     background-image: url("../img/bg-add.jpg");
+     height: 100vh;
+     width: 100vw;
+     background-repeat: no-repeat;
+}
+ .bg-inv {
+     background-image: url("../img/bg-inv_auto_x2.jpg");
+     height: 100vh;
+     width: 100vw;
+     background-repeat: no-repeat;
+}
+ .testando123 {
+     background-color: white;
+     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+     margin-top: 5%;
+     color: black;
+     padding: 10px;
+     border-radius: 8px;
+}
+ .back-btn {
+     width: 8vh;
+     height: 7.1vh;
+     background-color: #292929;
+     border-radius: 12px;
+     transition: 0.3s ease-in-out;
+     margin-top: 1%;
+     margin-left: 1%;
+}
+ .back-btn:hover {
+     background-color: rgb(194, 26, 26);
+     border: 1px solid rgb(160, 14, 14);
+     transition: 0.3s ease-in-out;
+     cursor: pointer;
+}
+ .money-icon {
+     width: 50%;
+     max-width: 50%;
+     max-height: 100%;
+     object-fit: contain;
+     aspect-ratio: 4/3;
+}
+ .li-money {
+     width: 20%;
+     display: flex;
+     align-items: center;
+}
+ .money-p {
+     font-family: "lol-font" !important;
+     font-size: 0.8em;
+     color: rgb(226, 226, 226);
+     margin-bottom: 0;
+}
+ #navbarTogglerDemo02 {
+     margin-left: 3%;
+}
+ .btn-buy-ex:nth-of-type(1) {
+     background-color: rgba(0, 128, 0, 0.363);
+     margin-right: 5%;
+     border-color: rgba(0, 128, 0, 0.363);
+     color: #ccc;
+}
+ .btn-buy-ex:nth-of-type(1):hover {
+     background-color: rgba(2, 165, 2, 0.904);
+     border-color: rgba(2, 165, 2, 0.904);
+     color: rgb(255, 255, 255);
+}
+ .btn-buy-ex:nth-of-type(2) {
+     margin-left: 5%;
+     background-color: rgba(128, 0, 0, 0.363) !important;
+     border-color: rgba(128, 0, 0, 0.363) !important;
+     color: #ccc;
+}
+ .btn-buy-ex:nth-of-type(2):hover {
+     background-color: rgba(165, 2, 2, 0.904) !important;
+     border-color: rgba(165, 2, 2, 0.904) !important;
+     color: rgb(255, 255, 255);
+}
+ .welcome-message {
+     display: none;
+     position: fixed;
+     top: 15%;
+     left: 50%;
+     border-radius: 5px;
+     transform: translateX(-50%);
+     padding: 10px;
+     background-color: #333;
+     color: white;
+     font-family: "lol-font" !important;
+     font-size: 14px;
+     z-index: 1000;
+     opacity: 1;
+     transition: opacity 1s ease-in-out;
+     min-width: 10vw;
+     text-align: center;
+     max-width: 90vw;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+     border-bottom: 2px solid #555;
+     border-left: 2px solid #555;
+}
+ .welcome-message-border {
+     border-bottom: 1px solid rgb(208, 168, 92);
+     padding-bottom: 5px;
+}
+ .fade-out {
+     opacity: 0;
+}
+ .btn-add-money {
+     background-color: #292929;
+     border-color: #292929;
+     color: #ccc;
+     transition: 0.3s ease-in-out;
+     margin-left: 5%;
+     width: 10%;
+     height: 15%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+ .ul-foto {
+     margin-left: 4vw !important;
+}
+ .main-editar-inv {
+     width: 84%;
+     margin: 0 auto;
+     position: absolute;
+     top: 45%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: #333333;
+     box-shadow: 0px 0px 10px 0px rgba(78, 78, 78, 0.75);
+     overflow-y: auto;
+     max-height: 80%;
+}
+ .skin-image {
+     width: 150px;
+     height: 150px;
+     margin: 5px;
+     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+     border-radius: 5px;
+     background-color: #fff;
+     margin-bottom: 1%;
+     object-fit: cover;
+}
+ .skin-gallery {
+     overflow-y: auto;
+     max-height: 100%;
+     display: flex;
+     flex-wrap: wrap;
+}
+ .skin-container {
+     position: relative;
+     display: inline-block;
+     margin-bottom: 20px;
+     margin-left: 1%;
+}
+ .sell-button {
+     position: absolute;
+     bottom: 10%;
+     left: 50%;
+     transform: translateX(-50%);
+     background-color: rgba(0, 128, 0, 0.363);
+     padding: 5px 5px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     border-color: rgba(0, 128, 0, 0.363);
+     color: #ccc;
+     font-size: 12px;
+     font-family: 'lol-font' !important;
+}
+ .sell-button:hover {
+     background-color: rgba(2, 165, 2, 0.904);
+     border-color: rgba(2, 165, 2, 0.904);
+     color: rgb(255, 255, 255);
+}
+ .editar-msg-bugado {
+     font-family: "lol-font" !important;
+     font-size: 2em;
+     color: rgb(163, 163, 163);
+     margin-bottom: 3%;
+     margin-top: 5%;
+     text-align: center;
+     transform: translate(90%, -50%);
 }

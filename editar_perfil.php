@@ -121,12 +121,12 @@ if (isset($_SESSION["updateSuccess"])) {
 ?>
 
     <script>
-        // Obtém o elemento do botão pelo ID
+        
         var meuBotao = document.getElementById('meuBotao');
 
-        // Adiciona um ouvinte de evento para o clique no botão
+    
         meuBotao.addEventListener('click', function () {
-            // Redireciona para a URL desejada
+
             window.location.href = 'principal.php';
         });
     </script>

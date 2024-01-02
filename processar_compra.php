@@ -65,9 +65,9 @@ if (!$result) {
 $row = mysqli_fetch_assoc($result);
 $dinheiroUsuario = $row['dinheiro'];
 
-// Verifica se o usuário tem dinheiro suficiente para comprar a skin
+
 if ($dinheiroUsuario >= $precoSkin) {
-    // Atualiza o dinheiro do usuário e realiza a compra
+
     $novoDinheiro = $dinheiroUsuario - $precoSkin;
     $atualizaQuery = "UPDATE usuario SET dinheiro = ? WHERE idusuario = ?";
     $stmt = mysqli_prepare($conexao, $atualizaQuery);
@@ -80,7 +80,7 @@ if ($dinheiroUsuario >= $precoSkin) {
     mysqli_stmt_bind_param($stmt, 'ii', $novoDinheiro, $userID);
     mysqli_stmt_execute($stmt);
 
-    // Insere a skin no inventário do usuário
+
     $inserirQuery = "INSERT INTO inventario (id_usuario, id_item, quantidade) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE quantidade = quantidade + 1";
     $stmt = mysqli_prepare($conexao, $inserirQuery);
 
@@ -92,15 +92,15 @@ if ($dinheiroUsuario >= $precoSkin) {
     mysqli_stmt_bind_param($stmt, 'ii', $userID, $idSkin);
     mysqli_stmt_execute($stmt);
 
-    // Responda com um JSON indicando o sucesso
+
     echo json_encode(['success' => true, 'title' => 'Sucesso!', 'message' => 'Skin adquirida com sucesso. Verifique seu inventário!', 'icon' => 'success']);
     exit();
 } else {
-    // Se o usuário não tiver dinheiro suficiente, responda com um JSON indicando o erro
+    
     echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Você não possui dinheiro para adquirir esta skin. Verifique seu saldo.', 'icon' => 'error']);
     exit();
 }
 
-// Feche a conexão com o banco de dados
+
 mysqli_close($conexao);
 ?>

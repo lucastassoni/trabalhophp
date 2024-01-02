@@ -1,14 +1,14 @@
 <?php
-// Inicia a sessão (caso não tenha sido iniciada)
+
 session_start();
 include("conexao.php");
 $userID = $_SESSION["id_usuario"];
 $nome_usuario = $_SESSION["nome_usuario"];
 $fotoPath = $_SESSION["fotoPath"];
 
-// Verifica se o usuário está logado
+
 if (!isset($_SESSION["nome_usuario"])) {
-    // Se não estiver logado, redireciona para a página de login
+    
     header("Location: login.php");
     exit();
 }
@@ -21,7 +21,7 @@ if ($resultado) {
 
     if ($row) {
         $dinheiroTotal = $row['dinheiro'];
-        $dinheiroString = strval($dinheiroTotal); // Converte para string
+        $dinheiroString = strval($dinheiroTotal); 
     } else {
         echo "Usuário não encontrado ou sem dinheiro.";
     }
@@ -114,7 +114,7 @@ if ($resultado) {
     </header>
     <video autoplay loop muted id="video-background">
         <source src="img/yasuo-video.mp4" type="video/mp4">
-        <!-- Caso o formato MP4 não seja suportado, você pode adicionar outras extensões de vídeo aqui -->
+       
     </video>
 
     <div class="container-fluid" id="main-yasuo">
@@ -405,24 +405,24 @@ if ($resultado) {
     </footer>
     <script>
         function adicionarDinheiro() {
-    // Chame aqui uma requisição AJAX para adicionar dinheiro
+    
     $.ajax({
         url: 'adicionar_dinheiro.php',
         type: 'POST',
         dataType: 'json',
         success: function(response) {
             if (response.success) {
-                // Atualiza o valor na página em tempo real
+                
                 var dinheiroAtual = parseFloat(document.getElementById('dinheiro').innerHTML);
                 var novoDinheiro = dinheiroAtual + 10;
                 document.getElementById('dinheiro').innerHTML = novoDinheiro.toFixed(2);
             } else {
-                // Exibe mensagem de erro (pode ser personalizado conforme necessário)
+         
                 console.error('Falha ao adicionar dinheiro.');
             }
         },
         error: function() {
-            // Exibe mensagem de erro em caso de falha na requisição AJAX
+            
             console.error('Erro na requisição AJAX.');
         }
     });

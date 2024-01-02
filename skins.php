@@ -3,9 +3,9 @@ session_start();
 
 include "conexao.php";
 
-// Verifica se o usuário está logado
+
 if (!isset($_SESSION["nome_usuario"])) {
-    // Se não estiver logado, redireciona para a página de login
+
     header("Location: login.php?msg=not_logged_in");
     exit();
 }
@@ -25,7 +25,7 @@ if ($resultado) {
 
     if ($row) {
         $dinheiroTotal = $row['dinheiro'];
-        $dinheiroString = strval($dinheiroTotal); // Converte para string
+        $dinheiroString = strval($dinheiroTotal); 
     } else {
         echo "Usuário não encontrado ou sem dinheiro.";
     }
@@ -123,7 +123,6 @@ if ($resultado) {
     </header>
     <video autoplay loop muted id="video-background">
         <source src="img/back-video-loja.mp4" type="video/mp4">
-        <!-- Caso o formato MP4 não seja suportado, você pode adicionar outras extensões de vídeo aqui -->
     </video>
 
     <div class="container-fluid" id="main-yasuo">
@@ -146,13 +145,12 @@ if ($resultado) {
                         mysqli_data_seek($resultSkins, 0);
                         $itemCount = 0;
 
-                        // Verifica se o usuário possui skins
+                        
                         if (mysqli_num_rows($resultSkins) > 0) {
                             while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
                                 $activeClass = ($itemCount == 0) ? 'active' : '';
                                 echo '<div class="carousel-item ' . $activeClass . '">';
                                 
-                                // Adicione a imagem da essência_loja em todas as skins
                                 echo '<div style="position: absolute; top: 10px; left: 10px; z-index: 999;">';
                                 echo '<img src="img/essencia_loja.png" alt="Essência Loja" style="width: 50px; height: 50px;">';
                                 echo '<p style="position: absolute; top: 25%; left: 100%; color: white;">' . $rowSkin['preco'] . '</p>';
@@ -169,7 +167,7 @@ if ($resultado) {
                                 $itemCount++;
                             }
                         } else {
-                            // Mensagem de alerta quando o usuário não possui skins
+                            
                             echo '<div class="alert alert-warning" role="alert">';
                             echo 'Você ainda não possui nenhuma skin no carrossel. Visite a aba <a href="add-skins.php">"Incluir Skins"</a> para adicionar skins ao carrossel!';
                             echo '</div>';
@@ -253,31 +251,29 @@ if ($resultado) {
         button.addEventListener('click', function (event) {
             event.preventDefault();
 
-            // Obtenha o link de compra da propriedade 'href'
+           
             var purchaseLink = button.getAttribute('href');
 
-            // Envie uma solicitação AJAX
+            
             fetch(purchaseLink, {
                 method: 'GET',
             })
             .then(response => response.json())
             .then(data => {
-                // Manipule a resposta do servidor (pode ser uma mensagem de sucesso ou erro)
+               
                 console.log(data);
 
-                // Exiba um alerta ou mensagem para o usuário usando SweetAlert
+                
                 Swal.fire({
                     title: data.title,
                     text: data.message,
                     icon: data.icon
                 }).then(() => {
-                    // Atualize a página ou faça outras ações conforme necessário
+                    
                     if (data.success) {
-                        // Execute ações de sucesso, se necessário
-                        location.reload(); // Recarregue a página para atualizar o conteúdo
-                    } else {
-                        // Execute ações de falha, se necessário
-                    }
+                       
+                        location.reload(); 
+                    } 
                 });
             })
             .catch(error => {
@@ -288,24 +284,24 @@ if ($resultado) {
 });
 
 function adicionarDinheiro() {
-    // Chame aqui uma requisição AJAX para adicionar dinheiro
+    
     $.ajax({
         url: 'adicionar_dinheiro.php',
         type: 'POST',
         dataType: 'json',
         success: function(response) {
             if (response.success) {
-                // Atualiza o valor na página em tempo real
+                
                 var dinheiroAtual = parseFloat(document.getElementById('dinheiro').innerHTML);
                 var novoDinheiro = dinheiroAtual + 10;
                 document.getElementById('dinheiro').innerHTML = novoDinheiro.toFixed(2);
             } else {
-                // Exibe mensagem de erro (pode ser personalizado conforme necessário)
+                
                 console.error('Falha ao adicionar dinheiro.');
             }
         },
         error: function() {
-            // Exibe mensagem de erro em caso de falha na requisição AJAX
+            
             console.error('Erro na requisição AJAX.');
         }
     });

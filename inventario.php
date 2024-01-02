@@ -20,7 +20,7 @@ if ($consulta === false) {
     die("Erro na consulta SQL: " . mysqli_error($conexao));
 }
 
-// Adicionando debug
+
 if ($consulta === null) {
     die("Consulta retornou nulo. Verifique a query ou a conexão com o banco de dados.");
 }
@@ -47,7 +47,7 @@ if ($consulta === null) {
         <h1 class="editar-msg">Inventário de Skins</h1>
         <div class="skin-gallery">
             <?php
-// Exibir as imagens das skins
+
 while ($row = mysqli_fetch_assoc($consulta)) {
     echo '<div class="skin-container">';
     echo '<img src="' . $row['imagem'] . '" class="skin-image" alt="Skin">';
@@ -55,7 +55,7 @@ while ($row = mysqli_fetch_assoc($consulta)) {
     echo '</div>';
 }
 
-// Se não houver imagens, exibir mensagem
+
 if (mysqli_num_rows($consulta) === 0) {
     echo '<p class="editar-msg-bugado">O usuário não possui skins no inventário.</p>';
 }
@@ -70,7 +70,7 @@ if (mysqli_num_rows($consulta) === 0) {
         });
 
         function venderSkin(idskin, preco) {
-            // Confirme se o usuário realmente deseja vender a skin
+            
             Swal.fire({
                 title: 'Você tem certeza?',
                 text: 'Esta ação não pode ser revertida!',
@@ -81,7 +81,7 @@ if (mysqli_num_rows($consulta) === 0) {
                 confirmButtonText: 'Sim, vender!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Faça uma solicitação AJAX para processar a venda
+ 
                     $.ajax({
                         url: 'processar_venda.php',
                         type: 'POST',
@@ -89,10 +89,10 @@ if (mysqli_num_rows($consulta) === 0) {
                         dataType: 'json',
                         success: function (response) {
                             if (response.success) {
-                                // Atualize a página ou realize ações necessárias
+                                
                                 location.reload();
                             } else {
-                                // Exiba mensagem de erro
+                          
                                 Swal.fire({
                                     title: 'Erro!',
                                     text: response.message,
@@ -101,7 +101,7 @@ if (mysqli_num_rows($consulta) === 0) {
                             }
                         },
                         error: function () {
-                            // Exiba mensagem de erro em caso de falha na requisição AJAX
+                           
                             console.error('Erro na requisição AJAX.');
                         }
                     });

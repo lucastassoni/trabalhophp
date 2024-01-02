@@ -9,7 +9,7 @@ if (isset($_SESSION["nome_usuario"])) {
 
 include "conexao.php";
 
-// Função para buscar o email do usuário no banco de dados
+
 function buscarEmailDoBanco($nome_usuario)
 {
     global $conexao;
@@ -20,7 +20,7 @@ function buscarEmailDoBanco($nome_usuario)
     return $row["email"];
 }
 
-// Função para buscar a senha do usuário no banco de dados
+
 function buscarSenhaDoBanco($nome_usuario)
 {
     global $conexao;
@@ -42,10 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["nome_usuario"]) && !e
         $_SESSION["nome_usuario"] = $nome_usuario;
         $_SESSION["id_usuario"] = $row["idusuario"];
         $_SESSION["fotoPath"] = $row["foto"];
-        $_SESSION["email"] = buscarEmailDoBanco($nome_usuario); // Adicione esta linha
-        $_SESSION["senha_usuario"] = buscarSenhaDoBanco($nome_usuario); // Ajuste aqui
+        $_SESSION["email"] = buscarEmailDoBanco($nome_usuario); 
+        $_SESSION["senha_usuario"] = buscarSenhaDoBanco($nome_usuario); 
 
-        // Remove o indicador de mensagem exibida na $_SESSION
+
         unset($_SESSION['welcome_message_displayed']);
 
         header("Location: principal.php");
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["nome_usuario"]) && !e
         });
     });
     </script>
-    <?php /* unset($_SESSION["loginError"]); */endif;?>
+    <?php endif;?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
@@ -149,12 +149,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["nome_usuario"]) && !e
     </form>
 
     <script>
-    // Obtém o elemento do botão pelo ID
+    
     var meuBotao = document.getElementById('meuBotao');
 
-    // Adiciona um ouvinte de evento para o clique no botão
+
     meuBotao.addEventListener('click', function() {
-        // Redireciona para a URL desejada
+       
         window.location.href = 'cadastro.php';
     });
     </script>

@@ -5,13 +5,13 @@ $username = isset($_POST['usuario']) ? $_POST['usuario'] : null;
 $email = isset($_POST['email']) ? $_POST['email'] : null;
 $usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
 
-// Inserção no BD
+
 include "conexao.php";
 
 $fotoPath = null;
 if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     $uploadDir = 'uploads/';
-    $uploadFileName = uniqid() . '_' . basename($_FILES['foto']['name']); // Adiciona um prefixo único ao nome do arquivo
+    $uploadFileName = uniqid() . '_' . basename($_FILES['foto']['name']); 
     $uploadFile = $uploadDir . $uploadFileName;
     move_uploaded_file($_FILES['foto']['tmp_name'], $uploadFile);
     $fotoPath = $uploadFile;
@@ -22,13 +22,13 @@ if (isset($_POST['Incluir']) && !empty($_POST['usuario'])) {
     $grava = mysqli_query($conexao, "INSERT INTO usuario (nome, email, senha, dinheiro, foto) VALUES ('$username', '$email', '$usersenha', 100.00, '$fotoPath')");
 
     if ($grava == true) {
-        // Recupera o ID do usuário recém-inserido
+        
         $idDoUsuario = mysqli_insert_id($conexao);
 
-        // Armazena o ID do usuário na sessão
+
         $_SESSION["id_usuario"] = $idDoUsuario;
 
-        // Mensagem de alerta usando JavaScript
+
         $cadastroSuccess = true;
     } else {
         die("Conexão falhou: " . mysqli_connect_error());

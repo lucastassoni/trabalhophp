@@ -29,7 +29,8 @@
     <?php
 session_start();
 
-if (!isset($_SESSION["nome_usuario"])) {
+if (!isset($_SESSION["nome_usuario"]))
+{
     header("Location: login.php?msg=not_logged_in");
     exit();
 }
@@ -51,7 +52,7 @@ class Skin
 
     public function inserirSkinNoBanco()
     {
-        // Conectar ao seu banco de dados (substitua pelos dados reais do seu banco)
+
         $servername = "localhost";
         $username = "root";
         $password = "root";
@@ -59,18 +60,17 @@ class Skin
 
         $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Verificar a conexão
-        if ($conn->connect_error) {
+        if ($conn->connect_error)
+        {
             die("Conexão com o banco de dados falhou: " . $conn->connect_error);
         }
 
-        // Preparar a instrução SQL
         $sql = "INSERT INTO skins (nome, preco, descricao, imagem)
                 VALUES ('$this->nome', $this->preco, '$this->descricao', '$this->imagem')";
 
-        // Executar a instrução SQL
-        if ($conn->query($sql) === true) {
-            // Alteração para exibir SweetAlert em vez de alerta padrão
+        if ($conn->query($sql) === true)
+        {
+
             echo '<script>
                         Swal.fire({
                             title: "Sucesso!",
@@ -81,7 +81,9 @@ class Skin
                             window.location.href = "add-skins.php"; // Redireciona para a página de adicionar skins
                         });
                      </script>';
-        } else {
+        }
+        else
+        {
             echo '<script>
                         Swal.fire({
                             title: "Erro!",
@@ -91,31 +93,26 @@ class Skin
                      </script>';
         }
 
-        // Fechar a conexão
         $conn->close();
     }
 }
 
-// Processar o formulário se enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obter dados do formulário
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+
     $nome = $_POST["nome"];
     $preco = $_POST["preco"];
     $descricao = $_POST["descricao"];
     $imagem = $_POST["imagem"];
 
-    // Criar instância da classe Skin e inserir no banco
     $skin = new Skin($nome, $preco, $descricao, $imagem);
     $skin->inserirSkinNoBanco();
 }
 ?>
     <script>
-        // Obtém o elemento do botão pelo ID
-        var meuBotao = document.getElementById('meuBotao');
 
-        // Adiciona um ouvinte de evento para o clique no botão
+        var meuBotao = document.getElementById('meuBotao');
         meuBotao.addEventListener('click', function () {
-            // Redireciona para a URL desejada
             window.location.href = 'skins.php';
         });
     </script>
