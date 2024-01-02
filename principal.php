@@ -1,7 +1,7 @@
 <?php
 // Inicia a sessão (caso não tenha sido iniciada)
 session_start();
-include("conexao.php");
+include "conexao.php";
 $userID = $_SESSION["id_usuario"];
 $nome_usuario = $_SESSION["nome_usuario"];
 $fotoPath = $_SESSION["fotoPath"];
@@ -45,6 +45,10 @@ if ($resultado) {
 </head>
 
 <body>
+    <!-- Adicione esta div abaixo do body no seu HTML -->
+<div id="welcome-message" class="welcome-message">
+    <p class="welcome-message-border">Bem-vindo, <?php echo $nome_usuario; ?>!</p>
+</div>
     <header>
     <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
@@ -83,15 +87,12 @@ if ($resultado) {
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="add-skins.php"
                                 role="button">Incluir Skins</a>
                         </li>
-                    </ul>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ul-foto">
+                        <li>
                             <img src="<?php echo $fotoPath; ?>" alt="Foto de Perfil"
-                                style="width: 45px; height: 45px; border-radius: 50%; margin-left: 100%">
+                                style="width: 45px; height: 45px; border-radius: 50%;">
                         </li>
-                        <li class="nav-item">
+                        <li>
                             <span class="nav-link text-light"><?php echo $nome_usuario; ?></span>
                         </li>
                         <li class="nav-item dropdown op-class">
@@ -108,8 +109,10 @@ if ($resultado) {
                         </li>
                         <li class="li-money">
                             <img class="money-icon" src="img/essencia_loja.png" alt="">
-                            <p class="money-p"> <?php echo "$dinheiroString" ?></p>
-                            </li>
+                            <p id="dinheiro" class="money-p"> <?php echo "$dinheiroString" ?></p>
+                            <button class="btn btn-success btn-add-money" onclick="adicionarDinheiro()">+</button>
+                        </li>
+                    </ul>
                     </ul>
                 </div>
         </nav>
@@ -200,6 +203,61 @@ if ($resultado) {
         </a>
 
     </footer>
+    <!-- Adicione este script no final do corpo do seu HTML -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verifica se a mensagem já foi exibida
+        var alreadyDisplayed = <?php echo isset($_SESSION['welcome_message_displayed']) && $_SESSION['welcome_message_displayed'] ? 'true' : 'false'; ?>;
+
+        if (!alreadyDisplayed) {
+            showWelcomeMessage();
+
+            // Define o indicador de mensagem exibida na $_SESSION
+            <?php $_SESSION['welcome_message_displayed'] = true;?>
+        }
+    });
+
+    // Função para exibir a mensagem de boas-vindas
+    function showWelcomeMessage() {
+        var welcomeMessage = document.getElementById('welcome-message');
+        welcomeMessage.style.display = 'block';
+
+        // Adiciona a classe de animação após 5 segundos (5000 milissegundos)
+        setTimeout(function () {
+            welcomeMessage.classList.add('fade-out');
+
+            // Remove a mensagem após a conclusão da animação (após 1 segundo)
+            setTimeout(function () {
+                welcomeMessage.style.display = 'none';
+            }, 1000); // Tempo da animação (deve corresponder à duração da transição no CSS)
+        }, 5000); // Ajuste o tempo conforme necessário
+    }
+
+    function adicionarDinheiro() {
+    // Chame aqui uma requisição AJAX para adicionar dinheiro
+    $.ajax({
+        url: 'adicionar_dinheiro.php',
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                // Atualiza o valor na página em tempo real
+                var dinheiroAtual = parseFloat(document.getElementById('dinheiro').innerHTML);
+                var novoDinheiro = dinheiroAtual + 10;
+                document.getElementById('dinheiro').innerHTML = novoDinheiro.toFixed(2);
+            } else {
+                // Exibe mensagem de erro (pode ser personalizado conforme necessário)
+                console.error('Falha ao adicionar dinheiro.');
+            }
+        },
+        error: function() {
+            // Exibe mensagem de erro em caso de falha na requisição AJAX
+            console.error('Erro na requisição AJAX.');
+        }
+    });
+}
+</script>
+
 </body>
 
 </html>

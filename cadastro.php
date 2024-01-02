@@ -6,12 +6,13 @@ $email = isset($_POST['email']) ? $_POST['email'] : null;
 $usersenha = isset($_POST['senha']) ? $_POST['senha'] : null;
 
 // Inserção no BD
-include("conexao.php");
+include "conexao.php";
 
 $fotoPath = null;
 if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-    $uploadDir = 'uploads/'; // Crie uma pasta chamada 'uploads' para armazenar as imagens do usuário
-    $uploadFile = $uploadDir . basename($_FILES['foto']['name']);
+    $uploadDir = 'uploads/';
+    $uploadFileName = uniqid() . '_' . basename($_FILES['foto']['name']); // Adiciona um prefixo único ao nome do arquivo
+    $uploadFile = $uploadDir . $uploadFileName;
     move_uploaded_file($_FILES['foto']['tmp_name'], $uploadFile);
     $fotoPath = $uploadFile;
 }
@@ -56,7 +57,7 @@ mysqli_close($conexao);
         });
     });
     </script>
-    <?php endif; ?>
+    <?php endif;?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css" type="text/css">

@@ -2,6 +2,7 @@
 session_start();
 
 include "conexao.php";
+
 // Verifica se o usuário está logado
 if (!isset($_SESSION["nome_usuario"])) {
     // Se não estiver logado, redireciona para a página de login
@@ -32,9 +33,6 @@ if ($resultado) {
     echo "Erro na consulta: " . mysqli_error($conexao);
 }
 
-if (!$resultSkins) {
-    die("Erro na consulta ao banco de dados: " . mysqli_error($conexao));
-}
 ?>
 
 
@@ -50,11 +48,13 @@ if (!$resultSkins) {
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <link type="image/jpg" rel="icon" href="img/yasuoicon.jpg">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
 <header>
-        <nav class="navbar navbar-expand-lg bg-dark header">
+    <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
                     <img class="home hover-image lol-center-icon" src="img/LoL_icon.svg.png" alt="Logo">
@@ -91,15 +91,12 @@ if (!$resultSkins) {
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="add-skins.php"
                                 role="button">Incluir Skins</a>
                         </li>
-                    </ul>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ul-foto">
+                        <li>
                             <img src="<?php echo $fotoPath; ?>" alt="Foto de Perfil"
-                                style="width: 45px; height: 45px; border-radius: 50%; margin-left: 100%">
+                                style="width: 45px; height: 45px; border-radius: 50%;">
                         </li>
-                        <li class="nav-item">
+                        <li>
                             <span class="nav-link text-light"><?php echo $nome_usuario; ?></span>
                         </li>
                         <li class="nav-item dropdown op-class">
@@ -116,8 +113,10 @@ if (!$resultSkins) {
                         </li>
                         <li class="li-money">
                             <img class="money-icon" src="img/essencia_loja.png" alt="">
-                            <p class="money-p"> <?php echo "$dinheiroString" ?></p>
-                            </li>
+                            <p id="dinheiro" class="money-p"> <?php echo "$dinheiroString" ?></p>
+                            <button class="btn btn-success btn-add-money" onclick="adicionarDinheiro()">+</button>
+                        </li>
+                    </ul>
                     </ul>
                 </div>
         </nav>
@@ -130,61 +129,64 @@ if (!$resultSkins) {
     <div class="container-fluid" id="main-yasuo">
         <div class="row section">
             <div class="col-md-8">
-            <div id="carouselExampleCaptions" class="carousel slide">
-            <div class="carousel-indicators">
-                <?php
-$indicatorCount = 0;
-while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
-    $activeClass = ($indicatorCount == 0) ? 'active' : '';
-    echo '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="' . $indicatorCount . '" class="' . $activeClass . '" aria-label="Slide ' . $indicatorCount . '"></button>';
-    $indicatorCount++;
-}
-?>
-            </div>
+                <div id="carouselExampleCaptions" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <?php
+                        $indicatorCount = 0;
+                        while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
+                            $activeClass = ($indicatorCount == 0) ? 'active' : '';
+                            echo '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="' . $indicatorCount . '" class="' . $activeClass . '" aria-label="Slide ' . $indicatorCount . '"></button>';
+                            $indicatorCount++;
+                        }
+                        ?>
+                    </div>
 
-            <div class="carousel-inner">
-    <?php
-mysqli_data_seek($resultSkins, 0);
-$itemCount = 0;
+                    <div class="carousel-inner">
+                        <?php
+                        mysqli_data_seek($resultSkins, 0);
+                        $itemCount = 0;
 
-while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
-    $activeClass = ($itemCount == 0) ? 'active' : '';
-    echo '<div class="carousel-item ' . $activeClass . '">';
+                        // Verifica se o usuário possui skins
+                        if (mysqli_num_rows($resultSkins) > 0) {
+                            while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
+                                $activeClass = ($itemCount == 0) ? 'active' : '';
+                                echo '<div class="carousel-item ' . $activeClass . '">';
+                                
+                                // Adicione a imagem da essência_loja em todas as skins
+                                echo '<div style="position: absolute; top: 10px; left: 10px; z-index: 999;">';
+                                echo '<img src="img/essencia_loja.png" alt="Essência Loja" style="width: 50px; height: 50px;">';
+                                echo '<p style="position: absolute; top: 25%; left: 100%; color: white;">' . $rowSkin['preco'] . '</p>';
+                                echo '</div>';
+                                
+                                echo '<img src="' . $rowSkin['imagem'] . '" class="d-block w-100" alt="...">';
+                                echo '<div class="carousel-caption d-none d-md-block">';
+                                echo '<h5>' . $rowSkin['nome'] . '</h5>';
+                                echo '<p>' . $rowSkin['descricao'] . '</p>';
+                                echo '<a href="processar_compra.php?id=' . $rowSkin['idskin'] . '" class="btn btn-primary btn-buy-ex">Comprar</a>';
+                                echo '<a href="remover_skin.php?id=' . $rowSkin['idskin'] . '" class="btn btn-danger btn-buy-ex">Excluir</a>';
+                                echo '</div>';
+                                echo '</div>';
+                                $itemCount++;
+                            }
+                        } else {
+                            // Mensagem de alerta quando o usuário não possui skins
+                            echo '<div class="alert alert-warning" role="alert">';
+                            echo 'Você ainda não possui nenhuma skin no carrossel. Visite a aba <a href="add-skins.php">"Incluir Skins"</a> para adicionar skins ao carrossel!';
+                            echo '</div>';
+                        }
+                        ?>
 
-    // Remova a verificação se é a última skin
-    // $ultimaSkin = ($itemCount == mysqli_num_rows($resultSkins) - 1);
+                    </div>
 
-    // Adicione a imagem da essência_loja em todas as skins
-    echo '<div style="position: absolute; top: 10px; left: 10px; z-index: 999;">';
-    echo '<img src="img/essencia_loja.png" alt="Essência Loja" style="width: 50px; height: 50px;">';
-    echo '<p style="position: absolute; top: 25%; left: 100%; color: white;">' . $rowSkin['preco'] . '</p>';
-    echo '</div>';
-
-    echo '<img src="' . $rowSkin['imagem'] . '" class="d-block w-100" alt="...">';
-    echo '<div class="carousel-caption d-none d-md-block">';
-    echo '<h5>' . $rowSkin['nome'] . '</h5>';
-    echo '<p>' . $rowSkin['descricao'] . '</p>';
-    echo '<a href="processar_compra.php?item=' . $rowSkin['nome'] . '" class="btn btn-primary btn-buy-ex">Comprar</a>';
-    echo '<a href="remover_skin.php?id=' . $rowSkin['idskin'] . '" class="btn btn-danger btn-buy-ex">Excluir</a>';
-    echo '</div>';
-    echo '</div>';
-    $itemCount++;
-}
-?>
-
-</div>
-
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
 
             <div class="col-md-4 bg bg-yasuo">
@@ -245,43 +247,69 @@ while ($rowSkin = mysqli_fetch_assoc($resultSkins)) {
     </footer>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var buttons = document.querySelectorAll('.btn-buy-ex');
+    var buttons = document.querySelectorAll('.btn-buy-ex');
 
-        buttons.forEach(function (button) {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
+    buttons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
 
-                // Obtenha o link de compra da propriedade 'href'
-                var purchaseLink = button.getAttribute('href');
+            // Obtenha o link de compra da propriedade 'href'
+            var purchaseLink = button.getAttribute('href');
 
-                // Envie uma solicitação AJAX
-                fetch(purchaseLink, {
-                    method: 'GET',
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Manipule a resposta do servidor (pode ser uma mensagem de sucesso ou erro)
-                    console.log(data);
+            // Envie uma solicitação AJAX
+            fetch(purchaseLink, {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Manipule a resposta do servidor (pode ser uma mensagem de sucesso ou erro)
+                console.log(data);
 
-                    // Exiba um alerta ou mensagem para o usuário usando SweetAlert
-                    Swal.fire({
-                        title: data.title,
-                        text: data.message,
-                        icon: data.icon
-                    }).then(() => {
-                        // Atualize a página ou faça outras ações conforme necessário
-                        if (data.success) {
-                            // Execute ações de sucesso, se necessário
-                            location.reload(); // Recarregue a página para atualizar o conteúdo
-                        } else {
-                            // Execute ações de falha, se necessário
-                        }
-                    });
-                })
-                .catch(error => console.error('Erro ao processar a solicitação:', error));
+                // Exiba um alerta ou mensagem para o usuário usando SweetAlert
+                Swal.fire({
+                    title: data.title,
+                    text: data.message,
+                    icon: data.icon
+                }).then(() => {
+                    // Atualize a página ou faça outras ações conforme necessário
+                    if (data.success) {
+                        // Execute ações de sucesso, se necessário
+                        location.reload(); // Recarregue a página para atualizar o conteúdo
+                    } else {
+                        // Execute ações de falha, se necessário
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao processar a solicitação:', error);
             });
         });
     });
+});
+
+function adicionarDinheiro() {
+    // Chame aqui uma requisição AJAX para adicionar dinheiro
+    $.ajax({
+        url: 'adicionar_dinheiro.php',
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                // Atualiza o valor na página em tempo real
+                var dinheiroAtual = parseFloat(document.getElementById('dinheiro').innerHTML);
+                var novoDinheiro = dinheiroAtual + 10;
+                document.getElementById('dinheiro').innerHTML = novoDinheiro.toFixed(2);
+            } else {
+                // Exibe mensagem de erro (pode ser personalizado conforme necessário)
+                console.error('Falha ao adicionar dinheiro.');
+            }
+        },
+        error: function() {
+            // Exibe mensagem de erro em caso de falha na requisição AJAX
+            console.error('Erro na requisição AJAX.');
+        }
+    });
+}
 </script>
 </body>
 

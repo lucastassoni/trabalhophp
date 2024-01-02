@@ -9,11 +9,11 @@ if (!isset($_SESSION["nome_usuario"])) {
     exit();
 }
 
-// Obtém o item a ser comprado a partir do parâmetro na URL
-$item = isset($_GET['item']) ? $_GET['item'] : '';
+// Obtém o ID da skin a ser comprada a partir do parâmetro na URL
+$idSkin = isset($_GET['id']) ? $_GET['id'] : '';
 
 // Consulta ao banco de dados para obter o preço do item
-$query = "SELECT idskin, preco FROM skins WHERE nome = ?";
+$query = "SELECT idskin, preco FROM skins WHERE idskin = ?";
 $stmt = mysqli_prepare($conexao, $query);
 
 if (!$stmt) {
@@ -21,7 +21,7 @@ if (!$stmt) {
     exit();
 }
 
-mysqli_stmt_bind_param($stmt, 's', $item);
+mysqli_stmt_bind_param($stmt, 'i', $idSkin);
 mysqli_stmt_execute($stmt);
 
 $result = mysqli_stmt_get_result($stmt);
@@ -32,8 +32,13 @@ if (!$result) {
 }
 
 $row = mysqli_fetch_assoc($result);
-$idItem = $row['idskin']; // Adiciona esta linha para obter o ID do item
-$precoItem = $row['preco'];
+
+if (!$row) {
+    echo json_encode(['success' => false, 'title' => 'Erro!', 'message' => 'Skin não encontrada.', 'icon' => 'error']);
+    exit();
+}
+
+$precoSkin = $row['preco'];
 
 // Obtém o ID do usuário
 $userID = $_SESSION["id_usuario"];
@@ -60,10 +65,10 @@ if (!$result) {
 $row = mysqli_fetch_assoc($result);
 $dinheiroUsuario = $row['dinheiro'];
 
-// Verifica se o usuário tem dinheiro suficiente para comprar o item
-if ($dinheiroUsuario >= $precoItem) {
+// Verifica se o usuário tem dinheiro suficiente para comprar a skin
+if ($dinheiroUsuario >= $precoSkin) {
     // Atualiza o dinheiro do usuário e realiza a compra
-    $novoDinheiro = $dinheiroUsuario - $precoItem;
+    $novoDinheiro = $dinheiroUsuario - $precoSkin;
     $atualizaQuery = "UPDATE usuario SET dinheiro = ? WHERE idusuario = ?";
     $stmt = mysqli_prepare($conexao, $atualizaQuery);
 
@@ -75,7 +80,7 @@ if ($dinheiroUsuario >= $precoItem) {
     mysqli_stmt_bind_param($stmt, 'ii', $novoDinheiro, $userID);
     mysqli_stmt_execute($stmt);
 
-    // Insere o item no inventário do usuário
+    // Insere a skin no inventário do usuário
     $inserirQuery = "INSERT INTO inventario (id_usuario, id_item, quantidade) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE quantidade = quantidade + 1";
     $stmt = mysqli_prepare($conexao, $inserirQuery);
 
@@ -84,7 +89,7 @@ if ($dinheiroUsuario >= $precoItem) {
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, 'ii', $userID, $idItem);
+    mysqli_stmt_bind_param($stmt, 'ii', $userID, $idSkin);
     mysqli_stmt_execute($stmt);
 
     // Responda com um JSON indicando o sucesso
@@ -99,17 +104,3 @@ if ($dinheiroUsuario >= $precoItem) {
 // Feche a conexão com o banco de dados
 mysqli_close($conexao);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra de Skin</title>
-
-    <!-- Inclua os arquivos necessários do SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-</head>
-<body>
-
-</body>
-</html>

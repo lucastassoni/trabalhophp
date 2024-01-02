@@ -45,6 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["nome_usuario"]) && !e
         $_SESSION["email"] = buscarEmailDoBanco($nome_usuario); // Adicione esta linha
         $_SESSION["senha_usuario"] = buscarSenhaDoBanco($nome_usuario); // Ajuste aqui
 
+        // Remove o indicador de mensagem exibida na $_SESSION
+        unset($_SESSION['welcome_message_displayed']);
+
         header("Location: principal.php");
         exit();
     } else {

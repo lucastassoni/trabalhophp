@@ -39,13 +39,14 @@ if ($resultado) {
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link type="image/png" rel="icon" href="img/Doomed_Minion_profileicon.png">
 </head>
 
 <body>
 
 <header>
-<nav class="navbar navbar-expand-lg bg-dark header">
+    <nav class="navbar navbar-expand-lg bg-dark header">
             <div class="container-fluid">
                 <a class="navbar-brand mx-auto" href="principal.php">
                     <img class="home hover-image lol-center-icon" src="img/LoL_icon.svg.png" alt="Logo">
@@ -82,15 +83,12 @@ if ($resultado) {
                             <a class="nav-link btn btn-primary botao" aria aria-current="page" href="add-skins.php"
                                 role="button">Incluir Skins</a>
                         </li>
-                    </ul>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ul-foto">
+                        <li>
                             <img src="<?php echo $fotoPath; ?>" alt="Foto de Perfil"
-                                style="width: 45px; height: 45px; border-radius: 50%; margin-left: 100%">
+                                style="width: 45px; height: 45px; border-radius: 50%;">
                         </li>
-                        <li class="nav-item">
+                        <li>
                             <span class="nav-link text-light"><?php echo $nome_usuario; ?></span>
                         </li>
                         <li class="nav-item dropdown op-class">
@@ -107,8 +105,10 @@ if ($resultado) {
                         </li>
                         <li class="li-money">
                             <img class="money-icon" src="img/essencia_loja.png" alt="">
-                            <p class="money-p"> <?php echo "$dinheiroString" ?></p>
-                            </li>
+                            <p id="dinheiro" class="money-p"> <?php echo "$dinheiroString" ?></p>
+                            <button class="btn btn-success btn-add-money" onclick="adicionarDinheiro()">+</button>
+                        </li>
+                    </ul>
                     </ul>
                 </div>
         </nav>
@@ -531,6 +531,31 @@ if ($resultado) {
             <img class="riot-logo" style="opacity: 0.8;" src="img/riot-games.png" alt="">
         </a>
     </footer>
+    <script>
+        function adicionarDinheiro() {
+    // Chame aqui uma requisição AJAX para adicionar dinheiro
+    $.ajax({
+        url: 'adicionar_dinheiro.php',
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                // Atualiza o valor na página em tempo real
+                var dinheiroAtual = parseFloat(document.getElementById('dinheiro').innerHTML);
+                var novoDinheiro = dinheiroAtual + 10;
+                document.getElementById('dinheiro').innerHTML = novoDinheiro.toFixed(2);
+            } else {
+                // Exibe mensagem de erro (pode ser personalizado conforme necessário)
+                console.error('Falha ao adicionar dinheiro.');
+            }
+        },
+        error: function() {
+            // Exibe mensagem de erro em caso de falha na requisição AJAX
+            console.error('Erro na requisição AJAX.');
+        }
+    });
+}
+    </script>
 </body>
 
 </html>
